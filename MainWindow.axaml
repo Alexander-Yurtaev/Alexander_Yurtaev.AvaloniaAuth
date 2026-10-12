@@ -14,6 +14,9 @@
         <converters:SelectedViewToBoolConverter x:Key="SelectedViewToBoolConv"/>
     </Window.Resources>
     <Window.DataTemplates>
+        <DataTemplate DataType="viewmodels:View1Model">
+            <views:View1/>
+        </DataTemplate>
         <DataTemplate DataType="viewmodels:View2Model">
             <views:View2/>
         </DataTemplate>

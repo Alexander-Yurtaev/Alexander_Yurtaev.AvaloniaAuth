@@ -2,5 +2,5 @@
 
 public interface IAuthService
 {
-    public bool IsAuthorized { get; set; }
+    public bool IsAuthorized { get; }
 }

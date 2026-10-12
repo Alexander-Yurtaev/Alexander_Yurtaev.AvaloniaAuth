@@ -2,8 +2,5 @@
 
 public class AuthService : IAuthService
 {
-    public bool IsAuthorized 
-    { 
-        get => throw new System.NotImplementedException(); 
-        set => throw new System.NotImplementedException(); }
+    public bool IsAuthorized => false;
 }
