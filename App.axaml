@@ -2,9 +2,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Alexander_Yurtaev.AvaloniaAuth.App"
              RequestedThemeVariant="Light">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
+    <Application.Resources>
+        <Color x:Key="PanelColor">#ffffff</Color>
+        <Color x:Key="BorderColor">#d0d4dc</Color>
+
+        <SolidColorBrush x:Key="PanelBrush"
+                         Color="{StaticResource PanelColor}"/>
+        <SolidColorBrush x:Key="BorderBrush"
+                         Color="{StaticResource BorderColor}"/>
+    </Application.Resources>
     <Application.Styles>
         <FluentTheme />
+        <Style Selector="Window">
+            <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
     </Application.Styles>
 </Application>
