@@ -12,8 +12,9 @@ public partial class View1Model : ObservableObject
     public View1Model(IAuthService authService)
     {
         _authService = authService;
+        _authService.Login("email", "12345");
         _unAthorizedModel = new UnAthorizedModel();
     }
 
-    public object? Content => _authService.IsAuthorized ? null : _unAthorizedModel;
+    public object? Content => _authService.IsAuthorized ? _authService.User : _unAthorizedModel;
 }

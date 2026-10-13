@@ -11,7 +11,7 @@ public partial class View2Model : ObservableObject
     
     public View2Model()
     {
-        DeveloperDetails.Add(new DeveloperDetail("Имя", "Александр"));
+        DeveloperDetails.Add(new DeveloperDetail("Имя", "Александр Юртаев"));
         DeveloperDetails.Add(new DeveloperDetail("Роль", ".NET / AvaloniaUI Developer"));
         DeveloperDetails.Add(new DeveloperDetail("Email", "ayurtaev.dev@mail.ru"));
         DeveloperDetails.Add(new DeveloperDetail("GitHub", "github.com/Alexander-Yurtaev"));

@@ -20,7 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <!--<Resource Include="Assets\AvatarBase.png" />-->
+	<AvaloniaResource Include="Assets\AvatarBase.png" />
   </ItemGroup>
 
   <ItemGroup>
