@@ -21,7 +21,7 @@
                     Orientation="Vertical"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top">
-            <Label Content="Name"
+            <Label Content="Имя"
                    Target="NameTextBox"/>
             <TextBox x:Name="NameTextBox"
                      Text="{Binding Name}"/>
