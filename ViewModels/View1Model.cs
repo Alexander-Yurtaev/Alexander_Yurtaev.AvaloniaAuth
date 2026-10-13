@@ -11,14 +11,10 @@ public partial class View1Model : ObservableRecipient, IRecipient<ValueChangedMe
     private readonly IAuthService _authService;
     private readonly UnAuthorizedModel _unAthorizedModel;
 
-    [ObservableProperty]
-    private object? _content;
-
     public View1Model(IAuthService authService)
     {
         IsActive = true; // Start receiving messages
         _authService = authService;
-        _authService.LoginAsync("email", "12345");
         _unAthorizedModel = new UnAuthorizedModel();
     }
 
@@ -26,4 +22,7 @@ public partial class View1Model : ObservableRecipient, IRecipient<ValueChangedMe
     {
         Content = _authService.IsAuthorized ? _authService.User : _unAthorizedModel;
     }
+
+    [ObservableProperty]
+    private object? _content;
 }

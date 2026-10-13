@@ -1,6 +1,7 @@
 ﻿using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
@@ -8,10 +9,12 @@ namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 public partial class LoginViewModel : ObservableObject
 {
     private readonly IAuthService _authService;
+    private readonly IDialogService _dialogService;
 
-    public LoginViewModel(IAuthService authService)
+    public LoginViewModel(IAuthService authService, IDialogService dialogService)
     {
         _authService = authService;
+        _dialogService = dialogService;
     }
 
     [ObservableProperty]
@@ -29,8 +32,10 @@ public partial class LoginViewModel : ObservableObject
     [RelayCommand]
     public async Task Register()
     {
-        var user = await _authService.RegisterAsync(Email, "", Password);
-        if (user is null) return;
-        await _authService.LoginAsync(Email, Password);
+        var user = await _dialogService.ShowRegisterDialog(App.Services!.GetRequiredService<MainWindow>());
+        if (user is not null)
+        {
+            await _authService.LoginAsync(user.Email, user.Password);
+        }
     }
 }

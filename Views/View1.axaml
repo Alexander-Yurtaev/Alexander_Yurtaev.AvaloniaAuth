@@ -24,7 +24,7 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="models:User">
-            <Grid Background="LightYellow">
+            <Grid>
                 <Border VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
                         <Border Width="72"

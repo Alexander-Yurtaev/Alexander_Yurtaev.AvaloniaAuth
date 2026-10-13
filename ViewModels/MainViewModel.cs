@@ -6,7 +6,6 @@ namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
-    private readonly IAuthService _authService;
     private readonly AuthViewModel _authVm;
 
     private readonly Dictionary<Enums.SelectedViewModel, ObservableObject> _viewModels = [];
@@ -26,7 +25,6 @@ public partial class MainViewModel : ObservableObject
         View2Model view2Model,
         AuthViewModel authVm)
     {
-        _authService = authService;
         _viewModels.Add(Enums.SelectedViewModel.View1Model, view1Model);
         _viewModels.Add(Enums.SelectedViewModel.View2Model, view2Model);
         _authVm = authVm;

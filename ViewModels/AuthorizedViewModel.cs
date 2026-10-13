@@ -35,13 +35,8 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
 
     private AuthorizedModel? GetModel()
     {
-        if (_authService.User is not null)
-        {
-            return new AuthorizedModel(_authService.User.Email);
-        }
-        else
-        {
-            return null;
-        }
+        return (_authService.User is not null) 
+            ? new AuthorizedModel(_authService.User.Email) 
+            : null;
     }
 }

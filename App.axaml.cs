@@ -1,5 +1,6 @@
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using Alexander_Yurtaev.AvaloniaAuth.ViewModels;
+using Alexander_Yurtaev.AvaloniaAuth.Views;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -22,6 +23,7 @@ public partial class App : Application
         var collection = new ServiceCollection();
 
         collection.AddSingleton<IAuthService, AuthService>();
+        collection.AddSingleton<IDialogService, DialogService>();
 
         collection.AddTransient<View1Model>();
         collection.AddTransient<View2Model>();
@@ -29,8 +31,11 @@ public partial class App : Application
         collection.AddTransient<LoginViewModel>();
         collection.AddTransient<AuthorizedViewModel>();
 
-        collection.AddTransient<MainViewModel>();
-        collection.AddTransient<MainWindow>();
+        collection.AddTransient<RegisterDialogViewModel>();
+        collection.AddTransient<RegisterDialog>();
+
+        collection.AddSingleton<MainViewModel>();
+        collection.AddSingleton<MainWindow>();
 
         Services = collection.BuildServiceProvider();
 

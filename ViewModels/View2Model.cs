@@ -6,9 +6,6 @@ namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 
 public partial class View2Model : ObservableObject
 {
-    [ObservableProperty]
-    private List<DeveloperDetail> _developerDetails = [];
-    
     public View2Model()
     {
         DeveloperDetails.Add(new DeveloperDetail("Имя", "Александр Юртаев"));
@@ -17,4 +14,7 @@ public partial class View2Model : ObservableObject
         DeveloperDetails.Add(new DeveloperDetail("GitHub", "github.com/Alexander-Yurtaev"));
         DeveloperDetails.Add(new DeveloperDetail("Стек", ".NET 10, Avalonia, MVVM"));
     }
+
+    [ObservableProperty]
+    private List<DeveloperDetail> _developerDetails = [];
 }
