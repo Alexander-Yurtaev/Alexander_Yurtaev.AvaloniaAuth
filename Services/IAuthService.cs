@@ -8,7 +8,7 @@ public interface IAuthService
     bool IsAuthorized { get; }
     User? User { get; }
 
-    Task RegisterAsync(string email, string name, string password);
+    Task<bool?> RegisterAsync(string email, string name, string password);
     Task LoginAsync(string email, string password);
     Task LogoutAsync();
 }

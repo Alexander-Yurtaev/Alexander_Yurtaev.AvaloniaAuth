@@ -9,6 +9,7 @@ namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<User?>>
 {
     private readonly AuthorizedViewModel _authorizedViewModel;
+    private readonly LoginViewModel _loginViewModel;
     private readonly IAuthService _authService;
 
     [ObservableProperty]
@@ -16,11 +17,13 @@ public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChange
 
     public AuthViewModel(
         IAuthService authService,
-        AuthorizedViewModel authorizedViewModel)
+        AuthorizedViewModel authorizedViewModel,
+        LoginViewModel loginViewModel)
     {
         IsActive = true;
         _authService = authService;
         _authorizedViewModel = authorizedViewModel;
+        _loginViewModel = loginViewModel;
         Content = GetContent();
     }
 
@@ -36,7 +39,7 @@ public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChange
             return _authorizedViewModel;
         } else
         {
-            return null;
+            return _loginViewModel;
         }
     }
 }

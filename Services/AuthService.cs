@@ -28,12 +28,12 @@ public class AuthService : ObservableObject, IAuthService
         await Task.Delay(0);
     }
 
-    public async Task RegisterAsync(string email, string name, string password)
+    public async Task<bool?> RegisterAsync(string email, string name, string password)
     {
         var id = new Random().Next(100);
         var source = @"avares://Alexander.Yurtaev.Avalonia.Auth;component/Assets/AvatarBase.png";
         User = new User(id, email, $"User_{id}", source, $"Role_{id}");
         WeakReferenceMessenger.Default.Send(new ValueChangedMessage<User?>(User));
-        await Task.Delay(0);
+        return await Task.FromResult(User != null);
     }
 }

@@ -12,6 +12,9 @@
         <DataTemplate DataType="viewmodels:AuthorizedViewModel">
             <local:AuthorizedView/>
         </DataTemplate>
+        <DataTemplate DataType="viewmodels:LoginViewModel">
+            <local:LoginView/>
+        </DataTemplate>
     </UserControl.DataTemplates>
     <ContentControl Content="{Binding Content}"/>
 </UserControl>

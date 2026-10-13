@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="using:Alexander_Yurtaev.AvaloniaAuth.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Alexander_Yurtaev.AvaloniaAuth.Views.LoginView"
+             x:DataType="viewmodels:LoginViewModel">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+        <StackPanel Grid.Row="0"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top">
+            <Label Content="Email"
+                   Target="EmailTextBox"/>
+            <TextBox x:Name="EmailTextBox"
+                     Text="{Binding Email}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top">
+            <Label Content="Пароль"
+                   Target="PasswordTextBox"/>
+            <TextBox x:Name="PasswordTextBox"
+                     Text="{Binding Password}"
+                     PasswordChar="*"/>
+        </StackPanel>
+        <Button Grid.Row="2"
+                Content="Login"
+                Command="{Binding LoginCommand}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"/>
+
+        <Border Grid.Row="4">
+            <Button
+                Content="btn_RegView"
+                Command="{Binding RegisterCommand}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"/>
+        </Border>
+    </Grid>
+</UserControl>
