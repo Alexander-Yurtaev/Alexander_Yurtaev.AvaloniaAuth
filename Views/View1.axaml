@@ -8,7 +8,7 @@
              x:Class="Alexander_Yurtaev.AvaloniaAuth.Views.View1"
              x:DataType="viewmodels:View1Model">
     <UserControl.DataTemplates>
-        <DataTemplate DataType="models:UnAthorizedModel">
+        <DataTemplate DataType="models:UnAuthorizedModel">
             <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">

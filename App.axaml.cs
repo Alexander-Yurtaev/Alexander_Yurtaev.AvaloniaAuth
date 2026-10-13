@@ -33,6 +33,9 @@ public partial class App : Application
         collection.AddTransient<AuthView>();
         collection.AddTransient<AuthViewModel>();
 
+        collection.AddTransient<AuthorizedViewModel>();
+        collection.AddTransient<AuthorizedView>();
+        
         collection.AddTransient<MainViewModel>();
         collection.AddTransient<MainWindow>();
 

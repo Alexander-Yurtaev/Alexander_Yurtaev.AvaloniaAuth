@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AuthorizedView.axaml.cs">
+      <DependentUpon>AuthorizedView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AuthView.axaml.cs">
       <DependentUpon>AuthView.axaml</DependentUpon>
     </Compile>

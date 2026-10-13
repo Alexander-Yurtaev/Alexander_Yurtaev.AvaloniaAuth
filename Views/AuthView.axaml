@@ -1,10 +1,17 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:generic="using:System.Collections.Generic"
+             xmlns:local="using:Alexander_Yurtaev.AvaloniaAuth.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodels="using:Alexander_Yurtaev.AvaloniaAuth.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Alexander_Yurtaev.AvaloniaAuth.Views.AuthView"
-             x:DataType="viewmodels:View1Model">
-  <TextBlock Text="{Binding Content}"/>
+             x:DataType="viewmodels:AuthViewModel">
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="viewmodels:AuthorizedViewModel">
+            <local:AuthorizedView/>
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    <ContentControl Content="{Binding Content}"/>
 </UserControl>

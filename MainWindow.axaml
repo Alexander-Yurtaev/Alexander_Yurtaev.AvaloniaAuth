@@ -20,6 +20,9 @@
         <DataTemplate DataType="viewmodels:View2Model">
             <views:View2/>
         </DataTemplate>
+        <DataTemplate DataType="viewmodels:AuthViewModel">
+            <views:AuthView/>
+        </DataTemplate>
     </Window.DataTemplates>
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0"
@@ -36,9 +39,13 @@
             Grid.Row="1"
             ColumnDefinitions="3*,*"
             ColumnSpacing="10">
-            <ContentControl Grid.Column="0" 
+            <ContentControl Grid.Column="0"
+                            BorderThickness="1"
+                            BorderBrush="Gray"
                             Content="{Binding ViewModel}"/>
-            <ContentControl Grid.Column="1" 
+            <ContentControl Grid.Column="1"
+                            BorderThickness="1"
+                            BorderBrush="Gray"
                             Content="{Binding AuthViewModel}"/>
         </Grid>
     </Grid>
