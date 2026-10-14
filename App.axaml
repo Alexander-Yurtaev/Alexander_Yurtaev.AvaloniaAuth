@@ -7,11 +7,14 @@
     <Application.Resources>
         <Color x:Key="PanelColor">#ffffff</Color>
         <Color x:Key="BorderColor">#d0d4dc</Color>
+        <Color x:Key="TextColor">#1f2430</Color>
 
         <SolidColorBrush x:Key="PanelBrush"
                          Color="{StaticResource PanelColor}"/>
         <SolidColorBrush x:Key="BorderBrush"
                          Color="{StaticResource BorderColor}"/>
+        <SolidColorBrush x:Key="TextBrush"
+                         Color="{StaticResource TextColor}"/>
     </Application.Resources>
     <Application.Styles>
         <FluentTheme />
@@ -26,6 +29,17 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
             <Setter Property="Background" Value="#fafbfc"/>
+        </Style>
+        <Style Selector="ToggleButton.tab-btn">
+            <Setter Property="Padding" Value="16 8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="Background" Value="#ffff"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="500"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
     </Application.Styles>
 </Application>

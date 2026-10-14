@@ -22,7 +22,8 @@
             <views:View2/>
         </DataTemplate>
         <DataTemplate DataType="models:SectionViewModel">
-            <ToggleButton Content="{Binding Title}"
+            <ToggleButton Classes="tab-btn"
+                          Content="{Binding Title}"
                           IsChecked="{Binding IsChecked}"/>
         </DataTemplate>
     </Window.DataTemplates>
@@ -30,8 +31,8 @@
           ColumnDefinitions="3*,*"
           ColumnSpacing="10">
         <Border Grid.Row="0"
-              Grid.Column="0"
-              Classes="main-toolbar">
+                Grid.Column="0"
+                Classes="main-toolbar">
             <ItemsControl Grid.Row="0"
                           Grid.Column="0"
                           ItemsSource="{Binding SectionManager.SectionsSource}">
