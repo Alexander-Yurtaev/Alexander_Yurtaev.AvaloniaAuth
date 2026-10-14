@@ -20,10 +20,10 @@ public partial class SectionManager : ObservableObject, ISectionManager
     [ObservableProperty]
     private SectionViewModel? _selectedSection;
 
-    public void Add(string key, SectionViewModel section, Func<IServiceProvider, string, ObservableObject> viewModelFactory)
+    public void Add(string key, SectionViewModel section, Func<string, ObservableObject> viewModelFactory)
     {
         _sections.Add(key, section);
-        _viewModels.Add(key, viewModelFactory(App.Services, key));
+        _viewModels.Add(key, viewModelFactory(key));
 
         SectionsSource = _sections.Values.ToArray();
         if (SectionsSource.Any() && SelectedSection is null)

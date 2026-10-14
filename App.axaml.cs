@@ -55,9 +55,10 @@ public partial class App : Application
 
         Services = collection.BuildServiceProvider();
 
-        var sectionManager = Services.GetService<ISectionManager>()!;
-        sectionManager.Add("View1", new SectionViewModel("View1", "View1", sectionManager), GetRecipientViewModel);
-        sectionManager.Add("View2", new SectionViewModel("View2", "View2", sectionManager), GetViewModel);
+        var sectionManager = Services.GetRequiredService<ISectionManager>();
+        var sp = Services;
+        sectionManager.Add("View1", new SectionViewModel("View1", "View1", sectionManager), key => GetRecipientViewModel(sp, key));
+        sectionManager.Add("View2", new SectionViewModel("View2", "View2", sectionManager), key => GetViewModel(sp, key));
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
