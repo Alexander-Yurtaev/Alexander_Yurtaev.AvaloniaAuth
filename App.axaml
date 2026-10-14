@@ -49,5 +49,8 @@
             <Setter Property="Foreground" Value="#fff"/>
             </Style>
         </Style>
+        <Style Selector="Border.main-body">
+            <Setter Property="Padding" Value="16"/>
+        </Style>
     </Application.Styles>
 </Application>
