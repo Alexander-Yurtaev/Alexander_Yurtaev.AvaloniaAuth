@@ -25,52 +25,48 @@
         </DataTemplate>
         <DataTemplate DataType="models:User">
             <Border Classes="user-card">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="72"
-                                Height="72"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                CornerRadius="36">
-                            <Border.Background>
-                                <ImageBrush Source="avares://Alexander_Yurtaev.AvaloniaAuth/Assets/AvatarBase.png"
-                                            Stretch="UniformToFill"
-                                            AlignmentX="Center"
-                                            AlignmentY="Center"/>
-                            </Border.Background>
-                        </Border>
-                        <Grid ColumnDefinitions="Auto,*"
-                              RowDefinitions="Auto,Auto,Auto,Auto">
+                <StackPanel Orientation="Horizontal">
+                    <Border Classes="avatar">
+                        <Border.Background>
+                            <ImageBrush Source="avares://Alexander_Yurtaev.AvaloniaAuth/Assets/AvatarBase.png"
+                                        Stretch="UniformToFill"
+                                        AlignmentX="Center"
+                                        AlignmentY="Center"/>
+                        </Border.Background>
+                    </Border>
+                    <Grid ColumnDefinitions="Auto,*"
+                          RowDefinitions="Auto,Auto,Auto,Auto">
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="0"
-                                       Text="id:"/>
-                            <TextBlock Grid.Column="1"
-                                       Grid.Row="0"
-                                       Text="{Binding Id}"/>
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="0"
+                                   Text="id:"/>
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="0"
+                                   Text="{Binding Id}"/>
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="1"
-                                       Text="email:"/>
-                            <TextBlock Grid.Column="1"
-                                       Grid.Row="1"
-                                       Text="{Binding Email}"/>
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="1"
+                                   Text="email:"/>
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding Email}"/>
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="2"
-                                       Text="имя:"/>
-                            <TextBlock Grid.Column="1"
-                                       Grid.Row="2"
-                                       Text="{Binding Name}"/>
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="2"
+                                   Text="имя:"/>
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="2"
+                                   Text="{Binding Name}"/>
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="3"
-                                       Text="роль:"/>
-                            <TextBlock Grid.Column="1"
-                                       Grid.Row="3"
-                                       Text="{Binding Role}"/>
-                        </Grid>
-                    </StackPanel>
-                </Border>
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="3"
+                                   Text="роль:"/>
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="3"
+                                   Text="{Binding Role}"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
         </DataTemplate>
     </UserControl.DataTemplates>
     <ContentControl Content="{Binding Content}"/>
