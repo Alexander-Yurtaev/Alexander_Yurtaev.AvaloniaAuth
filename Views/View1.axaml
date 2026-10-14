@@ -24,8 +24,7 @@
             </Border>
         </DataTemplate>
         <DataTemplate DataType="models:User">
-            <Grid>
-                <Border VerticalAlignment="Top">
+            <Border Classes="user-card">
                     <StackPanel Orientation="Horizontal">
                         <Border Width="72"
                                 Height="72"
@@ -72,7 +71,6 @@
                         </Grid>
                     </StackPanel>
                 </Border>
-            </Grid>
         </DataTemplate>
     </UserControl.DataTemplates>
     <ContentControl Content="{Binding Content}"/>
