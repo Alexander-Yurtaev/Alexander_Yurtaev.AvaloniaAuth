@@ -47,10 +47,10 @@
             <Grid ColumnDefinitions="3*,*"
                   ColumnSpacing="10">
                 <ContentControl Grid.Column="0"
-                                Classes="content-panel"
+                                Classes="content-panel-base content-panel"
                                 Content="{Binding SectionManager.ViewModel}"/>
                 <ContentControl Grid.Column="1"
-                                Classes="auth-panel"
+                                Classes="content-panel-base auth-panel"
                                 Content="{Binding AuthViewModel}"/>
             </Grid>
         </Border>
