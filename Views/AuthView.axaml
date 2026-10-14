@@ -16,5 +16,6 @@
             <local:LoginView/>
         </DataTemplate>
     </UserControl.DataTemplates>
-    <ContentControl Content="{Binding Content}"/>
+    <ContentControl Content="{Binding Content}"
+                    Classes="content-panel-base auth-panel"/>
 </UserControl>

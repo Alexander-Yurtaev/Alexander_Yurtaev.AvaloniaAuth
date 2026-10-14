@@ -9,6 +9,7 @@
         <Color x:Key="BorderColor">#d0d4dc</Color>
         <Color x:Key="TextColor">#1f2430</Color>
         <Color x:Key="PrimaryColor">#2f6fed</Color>
+        <Color x:Key="PrimaryHoverColor">#1f5bd6</Color>
         <Color x:Key="MutedColor">#6b7280</Color>
 
         <SolidColorBrush x:Key="PanelBrush"
@@ -19,6 +20,8 @@
                          Color="{StaticResource TextColor}"/>
         <SolidColorBrush x:Key="PrimaryBrush"
                          Color="{StaticResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="PrimaryHoverBrush"
+                         Color="{StaticResource PrimaryHoverColor}"/>
         <SolidColorBrush x:Key="MutedBrush"
                          Color="{StaticResource MutedColor}"/>
     </Application.Resources>
@@ -153,10 +156,59 @@
                 </Style>
             </Style>
             <Style Selector="^ ContentControl.auth-panel">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+                <Setter Property="Background" Value="#fff"/>
+                <Setter Property="Padding" Value="16"/>
+            </Style>
+        </Style>
+        <Style Selector="Grid.auth-state">
+            <Setter Property="RowSpacing" Value="12"/>
+            <Style Selector="^ StackPanel.field">
+                <Setter Property="Orientation" Value="Vertical"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="Spacing" Value="4"/>
+                <Style Selector="^ Label">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+                    <Setter Property="FontWeight" Value="500"/>
+                </Style>
+                <Style Selector="^ TextBox">
+                    <Setter Property="Padding" Value="10 8"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+                    <Setter Property="CornerRadius" Value="6"/>
+                    <Setter Property="FontSize" Value="13"/>
+                </Style>
             </Style>
         </Style>
         <Style Selector="ListBoxItem">
             <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Padding" Value="14 9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="500"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="Foreground" Value="#fff"/>
+            <Style Selector="^:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="{StaticResource PrimaryHoverBrush}"/>
+                <Setter Property="Foreground" Value="#fff"/>
+            </Style>
         </Style>
     </Application.Styles>
 </Application>

@@ -6,20 +6,17 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Alexander_Yurtaev.AvaloniaAuth.Views.LoginView"
              x:DataType="viewmodels:LoginViewModel">
-    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto"
+          Classes="auth-state">
         <StackPanel Grid.Row="0"
-                    Orientation="Vertical"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top">
+                    Classes="field">
             <Label Content="Email"
                    Target="EmailTextBox"/>
             <TextBox x:Name="EmailTextBox"
                      Text="{Binding Email}"/>
         </StackPanel>
         <StackPanel Grid.Row="1"
-                    Orientation="Vertical"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top">
+                    Classes="field">
             <Label Content="Пароль"
                    Target="PasswordTextBox"/>
             <TextBox x:Name="PasswordTextBox"
@@ -29,10 +26,7 @@
         <Button Grid.Row="2"
                 Content="Login"
                 Command="{Binding LoginCommand}"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"/>
+                Classes="primary"/>
 
         <Border Grid.Row="4">
             <Button

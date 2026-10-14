@@ -12,9 +12,6 @@
         Title="Alexander_Yurtaev.AvaloniaAuth"
         x:DataType="viewmodels:MainViewModel">
     <Window.DataTemplates>
-        <DataTemplate DataType="viewmodels:AuthViewModel">
-            <views:AuthView/>
-        </DataTemplate>
         <DataTemplate DataType="viewmodels:View1Model">
             <views:View1/>
         </DataTemplate>
@@ -49,9 +46,8 @@
                 <ContentControl Grid.Column="0"
                                 Classes="content-panel-base content-panel"
                                 Content="{Binding SectionManager.ViewModel}"/>
-                <ContentControl Grid.Column="1"
-                                Classes="content-panel-base auth-panel"
-                                Content="{Binding AuthViewModel}"/>
+                <views:AuthView Grid.Column="1"
+                                DataContext="{Binding AuthViewModel}"/>
             </Grid>
         </Border>
     </Grid>
