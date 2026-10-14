@@ -8,12 +8,12 @@ namespace Alexander_Yurtaev.AvaloniaAuth.Services;
 
 public class DialogService : IDialogService
 {
-    private readonly Func<RegisterDialog> _factory;
+    private readonly Func<RegisterDialog> _registerDialogFactory;
     private Window? _currentDialog;
 
     public DialogService(Func<RegisterDialog> factory)
     {
-        _factory = factory;
+        _registerDialogFactory = factory;
     }
 
     public void CloseCurrentDialog(object? dialogResult)
@@ -25,7 +25,7 @@ public class DialogService : IDialogService
 
     public async Task<UserForLogin?> ShowRegisterDialog(Window owner)
     {
-        _currentDialog = _factory();
+        _currentDialog = _registerDialogFactory();
         var user = await _currentDialog.ShowDialog<UserForLogin?>(owner);
         return user;
     }

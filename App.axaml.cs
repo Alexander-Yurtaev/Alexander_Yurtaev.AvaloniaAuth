@@ -32,8 +32,12 @@ public partial class App : Application
         collection.AddKeyedSingleton<ObservableObject, View2Model>("View2");
 
         collection.AddTransient<AuthViewModel>();
-        collection.AddTransient<LoginViewModel>();
         collection.AddTransient<AuthorizedViewModel>();
+        collection.AddTransient<LoginViewModel>();
+        collection.AddTransient<Func<LoginViewModel>>(provider =>
+        {
+            return provider.GetRequiredService<LoginViewModel>;
+        });
 
         collection.AddTransient<RegisterDialogViewModel>();
         collection.AddTransient<RegisterDialog>();
@@ -42,7 +46,7 @@ public partial class App : Application
             return provider.GetRequiredService<RegisterDialog>;
         });
 
-            collection.AddSingleton<MainViewModel>();
+        collection.AddSingleton<MainViewModel>();
         collection.AddSingleton<MainWindow>();
 
         Services = collection.BuildServiceProvider();
@@ -50,7 +54,7 @@ public partial class App : Application
         var sectionManager = Services.GetService<ISectionManager>()!;
         sectionManager.Add("View1", new SectionViewModel("View1", "View1"), GetRecipientViewModel);
         sectionManager.Add("View2", new SectionViewModel("View2", "View2"), GetViewModel);
-        
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Services.GetRequiredService<MainWindow>();
