@@ -41,24 +41,25 @@ public partial class App : Application
 
         collection.AddTransient<RegisterDialogViewModel>();
         collection.AddTransient<RegisterDialog>();
-        collection.AddTransient<Func<RegisterDialog>>(provider =>
-        {
-            return provider.GetRequiredService<RegisterDialog>;
-        });
+        collection.AddTransient<Func<RegisterDialog>>(sp => sp.GetRequiredService<RegisterDialog>);
 
         collection.AddSingleton<MainViewModel>();
         collection.AddSingleton<MainWindow>();
-        collection.AddTransient<Func<MainWindow>>(provider =>
-        {
-            return provider.GetRequiredService<MainWindow>;
-        });
+        collection.AddTransient<Func<MainWindow>>(sp => sp.GetRequiredService<MainWindow>);
 
         Services = collection.BuildServiceProvider();
 
         var sectionManager = Services.GetRequiredService<ISectionManager>();
         var sp = Services;
-        sectionManager.Add("View1", new SectionViewModel("View1", "View1", sectionManager), key => GetRecipientViewModel(sp, key));
-        sectionManager.Add("View2", new SectionViewModel("View2", "View2", sectionManager), key => GetViewModel(sp, key));
+        sectionManager.Add(
+            "View1", 
+            new SectionViewModel("View1", "View1", sectionManager),
+            sp.GetRequiredKeyedService<ObservableRecipient>);
+        
+        sectionManager.Add(
+            "View2", 
+            new SectionViewModel("View2", "View2", sectionManager), 
+            sp.GetRequiredKeyedService<ObservableObject>);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -66,17 +67,5 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
-    }
-
-    private ObservableObject GetViewModel(IServiceProvider sp, string key)
-    {
-        var viewModel = sp.GetRequiredKeyedService<ObservableObject>(key);
-        return viewModel;
-    }
-
-    private ObservableRecipient GetRecipientViewModel(IServiceProvider sp, string key)
-    {
-        var viewModel = sp.GetRequiredKeyedService<ObservableRecipient>(key);
-        return viewModel;
     }
 }
