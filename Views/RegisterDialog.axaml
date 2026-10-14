@@ -9,7 +9,7 @@
         Title="Регистрация"
         x:Name="RegisterDlg">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="*,Auto">
         <Border Grid.Row="0"
                 Classes="modal-body">
             <Grid RowDefinitions="Auto,Auto,Auto">
@@ -36,22 +36,15 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <StackPanel Grid.Row="3"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    Spacing="10">
-            <Button Content="Отмена"
-                    Command="{Binding CancelCommand}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"/>
-            <Button Content="Зарегистрироваться"
-                    Command="{Binding RegisterCommand}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"/>
-        </StackPanel>
+        <Border Grid.Row="3"
+                Classes="modal-footer">
+            <StackPanel Classes="modal-footer">
+                <Button Content="Отмена"
+                        Command="{Binding CancelCommand}"/>
+                <Button Content="Зарегистрироваться"
+                        Command="{Binding RegisterCommand}"
+                        Classes="primary"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
