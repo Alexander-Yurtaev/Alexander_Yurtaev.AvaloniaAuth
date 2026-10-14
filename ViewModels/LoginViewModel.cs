@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -11,11 +12,16 @@ public partial class LoginViewModel : ObservableValidator
 {
     private readonly IAuthService _authService;
     private readonly IDialogService _dialogService;
+    private readonly Func<MainWindow> _mainWindowFactory;
 
-    public LoginViewModel(IAuthService authService, IDialogService dialogService)
+    public LoginViewModel(
+        IAuthService authService, 
+        IDialogService dialogService,
+        Func<MainWindow> mainWindowFactory)
     {
         _authService = authService;
         _dialogService = dialogService;
+        _mainWindowFactory = mainWindowFactory;
     }
 
     [ObservableProperty]
@@ -56,7 +62,8 @@ public partial class LoginViewModel : ObservableValidator
     [RelayCommand]
     public async Task Register()
     {
-        var user = await _dialogService.ShowRegisterDialog(App.Services!.GetRequiredService<MainWindow>());
+        var owner = _mainWindowFactory();
+        var user = await _dialogService.ShowRegisterDialog(owner);
         if (user is not null)
         {
             await _authService.LoginAsync(user.Email, user.Password);

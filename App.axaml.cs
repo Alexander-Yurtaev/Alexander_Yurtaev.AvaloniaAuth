@@ -48,6 +48,10 @@ public partial class App : Application
 
         collection.AddSingleton<MainViewModel>();
         collection.AddSingleton<MainWindow>();
+        collection.AddTransient<Func<MainWindow>>(provider =>
+        {
+            return provider.GetRequiredService<MainWindow>;
+        });
 
         Services = collection.BuildServiceProvider();
 
