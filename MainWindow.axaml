@@ -4,45 +4,48 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:enums="using:Alexander_Yurtaev.AvaloniaAuth.Enums"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="using:Alexander_Yurtaev.AvaloniaAuth.Models"
         xmlns:viewmodels="using:Alexander_Yurtaev.AvaloniaAuth.ViewModels"
         xmlns:views="using:Alexander_Yurtaev.AvaloniaAuth.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Alexander_Yurtaev.AvaloniaAuth.MainWindow"
         Title="Alexander_Yurtaev.AvaloniaAuth"
         x:DataType="viewmodels:MainViewModel">
-    <Window.Resources>
-        <converters:SelectedViewToBoolConverter x:Key="SelectedViewToBoolConv"/>
-    </Window.Resources>
     <Window.DataTemplates>
+        <DataTemplate DataType="viewmodels:AuthViewModel">
+            <views:AuthView/>
+        </DataTemplate>
         <DataTemplate DataType="viewmodels:View1Model">
             <views:View1/>
         </DataTemplate>
         <DataTemplate DataType="viewmodels:View2Model">
             <views:View2/>
         </DataTemplate>
-        <DataTemplate DataType="viewmodels:AuthViewModel">
-            <views:AuthView/>
+        <DataTemplate DataType="models:SectionViewModel">
+            <ToggleButton Content="{Binding Title}"
+                          IsChecked="{Binding IsChecked}"/>
         </DataTemplate>
     </Window.DataTemplates>
     <Grid RowDefinitions="Auto,*">
-        <StackPanel Grid.Row="0"
-                    Grid.Column="0"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Spacing="10">
-            <ToggleButton Content="btn__View_1"
-                          IsChecked="{Binding SelectedViewModel, Converter={StaticResource SelectedViewToBoolConv}, ConverterParameter={x:Static enums:SelectedViewModel.View1Model}}"/>
-            <ToggleButton Content="btn__View_2"
-                          IsChecked="{Binding SelectedViewModel, Converter={StaticResource SelectedViewToBoolConv}, ConverterParameter={x:Static enums:SelectedViewModel.View2Model}}"/>
-        </StackPanel>
-        <Grid 
+        <ItemsControl Grid.Row="0"
+                      Grid.Column="0"
+                      ItemsSource="{Binding SectionManager.SectionsSource}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Spacing="10"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <Grid
             Grid.Row="1"
             ColumnDefinitions="3*,*"
             ColumnSpacing="10">
             <ContentControl Grid.Column="0"
                             BorderThickness="1"
                             BorderBrush="Gray"
-                            Content="{Binding ViewModel}"/>
+                            Content="{Binding SectionManager.ViewModel}"/>
             <ContentControl Grid.Column="1"
                             BorderThickness="1"
                             BorderBrush="Gray"

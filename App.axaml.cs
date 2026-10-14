@@ -1,9 +1,11 @@
+using Alexander_Yurtaev.AvaloniaAuth.Models;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 using Alexander_Yurtaev.AvaloniaAuth.Views;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -11,7 +13,7 @@ namespace Alexander_Yurtaev.AvaloniaAuth;
 
 public partial class App : Application
 {
-    public static IServiceProvider? Services {  get; private set; }
+    public static IServiceProvider Services { get; private set; } = null!;
 
     public override void Initialize()
     {
@@ -24,9 +26,11 @@ public partial class App : Application
 
         collection.AddSingleton<IAuthService, AuthService>();
         collection.AddSingleton<IDialogService, DialogService>();
+        collection.AddSingleton<ISectionManager, SectionManager>();
 
-        collection.AddTransient<View1Model>();
-        collection.AddTransient<View2Model>();
+        collection.AddKeyedSingleton<ObservableRecipient, View1Model>("View1");
+        collection.AddKeyedSingleton<ObservableObject, View2Model>("View2");
+
         collection.AddTransient<AuthViewModel>();
         collection.AddTransient<LoginViewModel>();
         collection.AddTransient<AuthorizedViewModel>();
@@ -39,11 +43,27 @@ public partial class App : Application
 
         Services = collection.BuildServiceProvider();
 
+        var sectionManager = Services.GetService<ISectionManager>()!;
+        sectionManager.Add("View1", new SectionViewModel("View1", "View1"), GetRecipientViewModel);
+        sectionManager.Add("View2", new SectionViewModel("View2", "View2"), GetViewModel);
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Services.GetRequiredService<MainWindow>();
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private ObservableObject GetViewModel(IServiceProvider sp, string key)
+    {
+        var viewModel = sp.GetRequiredKeyedService<ObservableObject>(key);
+        return viewModel;
+    }
+
+    private ObservableRecipient GetRecipientViewModel(IServiceProvider sp, string key)
+    {
+        var viewModel = sp.GetRequiredKeyedService<ObservableRecipient>(key);
+        return viewModel;
     }
 }
