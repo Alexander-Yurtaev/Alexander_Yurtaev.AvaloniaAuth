@@ -66,5 +66,25 @@
         <Style Selector="UserControl.content-view">
             <Setter Property="Padding" Value="20"/>
         </Style>
+        <Style Selector="Border.auth_hint">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Padding" Value="24 60"/>
+            <Style Selector="^ TextBlock.h3">
+                <Setter Property="Margin" Value="0 0 0 10"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style Selector="^ TextBlock.p">
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="LineHeight" Value="21"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+        </Style>
     </Application.Styles>
 </Application>

@@ -10,19 +10,18 @@
              Classes="content-view">
     <UserControl.DataTemplates>
         <DataTemplate DataType="models:UnAuthorizedModel">
-            <StackPanel Orientation="Vertical"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                <TextBlock Text="{Binding Title}"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding Message}"
-                           TextWrapping="WrapWithOverflow"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center"/>
-            </StackPanel>
+            <Border Classes="auth_hint">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Title}"
+                               Classes="h3"/>
+                    <TextBlock Text="{Binding Message}"
+                               Classes="p"
+                               TextWrapping="WrapWithOverflow"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"/>
+                </StackPanel>
+            </Border>
         </DataTemplate>
         <DataTemplate DataType="models:User">
             <Grid>
@@ -34,9 +33,9 @@
                                 HorizontalAlignment="Center"
                                 CornerRadius="36">
                             <Border.Background>
-                                <ImageBrush Source="avares://Alexander_Yurtaev.AvaloniaAuth/Assets/AvatarBase.png" 
-                                            Stretch="UniformToFill" 
-                                            AlignmentX="Center" 
+                                <ImageBrush Source="avares://Alexander_Yurtaev.AvaloniaAuth/Assets/AvatarBase.png"
+                                            Stretch="UniformToFill"
+                                            AlignmentX="Center"
                                             AlignmentY="Center"/>
                             </Border.Background>
                         </Border>
