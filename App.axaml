@@ -200,6 +200,9 @@
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style Selector="^:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="#f0f2f5"/>
+            </Style>
         </Style>
         <Style Selector="Button.primary">
             <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
@@ -209,6 +212,11 @@
                 <Setter Property="Background" Value="{StaticResource PrimaryHoverBrush}"/>
                 <Setter Property="Foreground" Value="#fff"/>
             </Style>
+        </Style>
+        <Style Selector="Border.auth-footer">
+            <Setter Property="BorderThickness" Value="0 1 0 0"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="Padding" Value="0 12 0 0"/>
         </Style>
     </Application.Styles>
 </Application>

@@ -28,14 +28,10 @@
                 Command="{Binding LoginCommand}"
                 Classes="primary"/>
 
-        <Border Grid.Row="4">
-            <Button
-                Content="btn__RegView"
-                Command="{Binding RegisterCommand}"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"/>
+        <Border Grid.Row="4"
+                Classes="auth-footer">
+            <Button Content="btn__RegView"
+                    Command="{Binding RegisterCommand}"/>
         </Border>
     </Grid>
 </UserControl>
