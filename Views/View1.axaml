@@ -25,7 +25,8 @@
         </DataTemplate>
         <DataTemplate DataType="models:User">
             <Border Classes="user-card">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal"
+                            Classes="user-card">
                     <Border Classes="avatar">
                         <Border.Background>
                             <ImageBrush Source="avares://Alexander_Yurtaev.AvaloniaAuth/Assets/AvatarBase.png"
