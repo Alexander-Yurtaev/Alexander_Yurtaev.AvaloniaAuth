@@ -21,5 +21,11 @@
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
             <Setter Property="CornerRadius" Value="8"/>
         </Style>
+        <Style Selector="Border.main-toolbar">
+            <Setter Property="Padding" Value="18 12"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="Background" Value="#fafbfc"/>
+        </Style>
     </Application.Styles>
 </Application>

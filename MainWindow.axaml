@@ -26,30 +26,33 @@
                           IsChecked="{Binding IsChecked}"/>
         </DataTemplate>
     </Window.DataTemplates>
-    <Grid RowDefinitions="Auto,*">
-        <ItemsControl Grid.Row="0"
-                      Grid.Column="0"
-                      ItemsSource="{Binding SectionManager.SectionsSource}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                Spacing="10"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <Grid
-            Grid.Row="1"
-            ColumnDefinitions="3*,*"
-            ColumnSpacing="10">
-            <ContentControl Grid.Column="0"
-                            BorderThickness="1"
-                            BorderBrush="Gray"
-                            Content="{Binding SectionManager.ViewModel}"/>
-            <ContentControl Grid.Column="1"
-                            BorderThickness="1"
-                            BorderBrush="Gray"
-                            Content="{Binding AuthViewModel}"/>
-        </Grid>
+    <Grid RowDefinitions="Auto,*"
+          ColumnDefinitions="3*,*"
+          ColumnSpacing="10">
+        <Border Grid.Row="0"
+              Grid.Column="0"
+              Classes="main-toolbar">
+            <ItemsControl Grid.Row="0"
+                          Grid.Column="0"
+                          ItemsSource="{Binding SectionManager.SectionsSource}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Spacing="10"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Border>
+        <ContentControl Grid.Row="1"
+                        Grid.Column="0"
+                        BorderThickness="1"
+                        BorderBrush="Gray"
+                        Content="{Binding SectionManager.ViewModel}"/>
+        <ContentControl Grid.Row="1"
+                        Grid.Column="1"
+                        BorderThickness="1"
+                        BorderBrush="Gray"
+                        Content="{Binding AuthViewModel}"/>
     </Grid>
 </Window>
