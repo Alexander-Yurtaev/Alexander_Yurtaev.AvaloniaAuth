@@ -63,5 +63,8 @@
         </Style>
         <Style Selector="ContentControl.auth-panel">
         </Style>
+        <Style Selector="UserControl.content-view">
+            <Setter Property="Padding" Value="20"/>
+        </Style>
     </Application.Styles>
 </Application>

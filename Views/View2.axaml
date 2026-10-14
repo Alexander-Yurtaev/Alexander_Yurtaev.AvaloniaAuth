@@ -6,7 +6,8 @@
              xmlns:viewmodels="using:Alexander_Yurtaev.AvaloniaAuth.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Alexander_Yurtaev.AvaloniaAuth.Views.View2"
-             x:DataType="viewmodels:View2Model">
+             x:DataType="viewmodels:View2Model"
+             Classes="content-view">
     <Grid RowDefinitions="Auto,*">
         <TextBlock Grid.Row="0"
                    Text="О разработчике"

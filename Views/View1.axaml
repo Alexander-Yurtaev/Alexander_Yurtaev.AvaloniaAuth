@@ -6,7 +6,8 @@
              xmlns:viewmodels="using:Alexander_Yurtaev.AvaloniaAuth.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Alexander_Yurtaev.AvaloniaAuth.Views.View1"
-             x:DataType="viewmodels:View1Model">
+             x:DataType="viewmodels:View1Model"
+             Classes="content-view">
     <UserControl.DataTemplates>
         <DataTemplate DataType="models:UnAuthorizedModel">
             <StackPanel Orientation="Vertical"
