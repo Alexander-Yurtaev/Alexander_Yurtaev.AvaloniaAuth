@@ -35,34 +35,43 @@
                         </Border.Background>
                     </Border>
                     <Grid ColumnDefinitions="Auto,*"
-                          RowDefinitions="Auto,Auto,Auto,Auto">
+                          RowDefinitions="Auto,Auto,Auto,Auto"
+                          Classes="user-fields">
 
                         <TextBlock Grid.Column="0"
                                    Grid.Row="0"
+                                   Classes="label"
                                    Text="id:"/>
                         <TextBlock Grid.Column="1"
                                    Grid.Row="0"
+                                   Classes="value"
                                    Text="{Binding Id}"/>
 
                         <TextBlock Grid.Column="0"
                                    Grid.Row="1"
+                                   Classes="label"
                                    Text="email:"/>
                         <TextBlock Grid.Column="1"
                                    Grid.Row="1"
+                                   Classes="value"
                                    Text="{Binding Email}"/>
 
                         <TextBlock Grid.Column="0"
                                    Grid.Row="2"
+                                   Classes="label"
                                    Text="имя:"/>
                         <TextBlock Grid.Column="1"
                                    Grid.Row="2"
+                                   Classes="value"
                                    Text="{Binding Name}"/>
 
                         <TextBlock Grid.Column="0"
                                    Grid.Row="3"
+                                   Classes="label"
                                    Text="роль:"/>
                         <TextBlock Grid.Column="1"
                                    Grid.Row="3"
+                                   Classes="value"
                                    Text="{Binding Role}"/>
                     </Grid>
                 </StackPanel>

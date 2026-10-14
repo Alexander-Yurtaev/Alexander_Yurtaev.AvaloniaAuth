@@ -9,6 +9,7 @@
         <Color x:Key="BorderColor">#d0d4dc</Color>
         <Color x:Key="TextColor">#1f2430</Color>
         <Color x:Key="PrimaryColor">#2f6fed</Color>
+        <Color x:Key="MutedColor">#6b7280</Color>
 
         <SolidColorBrush x:Key="PanelBrush"
                          Color="{StaticResource PanelColor}"/>
@@ -18,6 +19,8 @@
                          Color="{StaticResource TextColor}"/>
         <SolidColorBrush x:Key="PrimaryBrush"
                          Color="{StaticResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="MutedBrush"
+                         Color="{StaticResource MutedColor}"/>
     </Application.Resources>
     <Application.Styles>
         <FluentTheme />
@@ -49,8 +52,8 @@
             <Setter Property="Cursor" Value="Hand"/>
             <Style Selector="^:checked /template/ ContentPresenter#PART_ContentPresenter">
                 <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
-            <Setter Property="Foreground" Value="#fff"/>
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="#fff"/>
             </Style>
         </Style>
         <Style Selector="Border.main-body">
@@ -98,13 +101,26 @@
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Background" Value="#fafbfc"/>
-        </Style>
-        <Style Selector="Border.avatar">
-            <Setter Property="Height" Value="72"/>
-            <Setter Property="Width" Value="72"/>
-            <Setter Property="CornerRadius" Value="36"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Style Selector="^ Border.avatar">
+                <Setter Property="Height" Value="72"/>
+                <Setter Property="Width" Value="72"/>
+                <Setter Property="CornerRadius" Value="36"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style Selector="^ Grid.user-fields">
+                <Setter Property="ColumnSpacing" Value="8"/>
+                <Setter Property="RowSpan" Value="6"/>
+            </Style>
+            <Style Selector="^ TextBlock.label">
+                <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+                <Setter Property="MinWidth" Value="60"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <Style Selector="^ TextBlock.value">
+                <Setter Property="FontWeight" Value="500"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
         </Style>
     </Application.Styles>
 </Application>
