@@ -52,5 +52,15 @@
         <Style Selector="Border.main-body">
             <Setter Property="Padding" Value="16"/>
         </Style>
+        <Style Selector="ContentControl.content-panel">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="MinWidth" Value="480"/>
+        </Style>
+        <Style Selector="ContentControl.auth-panel">
+            
+        </Style>
     </Application.Styles>
 </Application>
