@@ -8,10 +8,13 @@ namespace Alexander_Yurtaev.AvaloniaAuth.Models;
 
 public partial class SectionViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<string>>
 {
-    public SectionViewModel(string key, string title)
+    private readonly ISectionManager _sectionManager;
+
+    public SectionViewModel(string key, string title, ISectionManager sectionManager)
     {
         IsActive = true;
         Title = title;
+        _sectionManager = sectionManager;
         Key = key;
         IsChecked = false;
     }
@@ -24,7 +27,7 @@ public partial class SectionViewModel : ObservableRecipient, IRecipient<ValueCha
 
     [ObservableProperty]
     private string _title;
-
+    
     partial void OnIsCheckedChanged(bool? value)
     {
         if (value == true)
@@ -38,8 +41,7 @@ public partial class SectionViewModel : ObservableRecipient, IRecipient<ValueCha
         IsChecked = Key == message.Value;
         if (IsChecked == true)
         {
-            var sectionManager = App.Services!.GetRequiredService<ISectionManager>();
-            sectionManager.SelectedSection = this;
+            _sectionManager.SelectedSection = this;
         }
     }
 }
