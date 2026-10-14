@@ -10,7 +10,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Alexander_Yurtaev.AvaloniaAuth.MainWindow"
         Title="Alexander_Yurtaev.AvaloniaAuth"
-        x:DataType="viewmodels:MainViewModel">
+        x:DataType="viewmodels:MainViewModel"
+        x:Name="MainWnd">
     <Window.DataTemplates>
         <DataTemplate DataType="viewmodels:View1Model">
             <views:View1/>

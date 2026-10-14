@@ -1,5 +1,7 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:Alexander_Yurtaev.AvaloniaAuth"
+             xmlns:views="using:Alexander_Yurtaev.AvaloniaAuth.Views"
              x:Class="Alexander_Yurtaev.AvaloniaAuth.App"
              RequestedThemeVariant="Light">
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -35,15 +37,19 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+
+
         <Style Selector="Window">
             <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
             <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="Width" Value="800"/>
-            <Setter Property="Height" Value="450"/>
             <Setter Property="CanResize" Value="False"/>
             <Setter Property="WindowStartupLocation" Value="CenterScreen"/>
+        </Style>
+        <Style Selector="Window#MainWnd">
+            <Setter Property="Width" Value="800"/>
+            <Setter Property="Height" Value="450"/>
         </Style>
         <Style Selector="Border.main-toolbar">
             <Setter Property="Padding" Value="18 12"/>
@@ -164,24 +170,6 @@
         </Style>
         <Style Selector="Grid.auth-state">
             <Setter Property="RowSpacing" Value="12"/>
-            <Style Selector="^ StackPanel.field">
-                <Setter Property="Orientation" Value="Vertical"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Top"/>
-                <Setter Property="Spacing" Value="4"/>
-                <Style Selector="^ Label">
-                    <Setter Property="FontSize" Value="12"/>
-                    <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
-                    <Setter Property="FontWeight" Value="500"/>
-                </Style>
-                <Style Selector="^ TextBox">
-                    <Setter Property="Padding" Value="10 8"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-                    <Setter Property="CornerRadius" Value="6"/>
-                    <Setter Property="FontSize" Value="13"/>
-                </Style>
-            </Style>
         </Style>
         <Style Selector="ListBoxItem">
             <Setter Property="Padding" Value="0"/>
@@ -226,5 +214,36 @@
                 <Setter Property="FontWeight" Value="Bold"/>
             </Style>
         </Style>
+
+        <!--RegisterDialog style-->
+        <Style Selector="Window#RegisterDlg">
+            <Setter Property="Width" Value="400"/>
+            <Setter Property="Height" Value="300"/>
+        </Style>
+        <Style Selector="Border.modal-body">
+            <Setter Property="Padding" Value="18"/>
+        </Style>
+        <Style Selector="Grid.modal-body">
+            <Setter Property="RowSpacing" Value="12"/>
+            <Setter Property="Background" Value="green"/>
+        </Style>
+        <Style Selector="StackPanel.field">
+                <Setter Property="Orientation" Value="Vertical"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="Spacing" Value="4"/>
+                <Style Selector="^ Label">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+                    <Setter Property="FontWeight" Value="500"/>
+                </Style>
+                <Style Selector="^ TextBox">
+                    <Setter Property="Padding" Value="10 8"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+                    <Setter Property="CornerRadius" Value="6"/>
+                    <Setter Property="FontSize" Value="13"/>
+                </Style>
+            </Style>
     </Application.Styles>
 </Application>

@@ -5,9 +5,13 @@ namespace Alexander_Yurtaev.AvaloniaAuth.Views;
 
 public partial class RegisterDialog : Window
 {
-    public RegisterDialog(RegisterDialogViewModel vm)
+    public RegisterDialog()
     {
         InitializeComponent();
+    }
+
+    public RegisterDialog(RegisterDialogViewModel vm) : this()
+    {
         DataContext = vm;
     }
 }
