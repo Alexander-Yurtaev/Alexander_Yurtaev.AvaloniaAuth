@@ -8,30 +8,33 @@
              x:Class="Alexander_Yurtaev.AvaloniaAuth.Views.View2"
              x:DataType="viewmodels:View2Model"
              Classes="content-view">
-    <Grid RowDefinitions="Auto,*">
-        <TextBlock Grid.Row="0"
-                   Text="О разработчике"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontWeight="Bold"/>
-        <ListBox ItemsSource="{Binding DeveloperDetails}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="models:DeveloperDetail">
-                    <Border>
-                        <Grid>
-                            <TextBlock Text="{Binding Name}"
-                                   HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding Value}"
-                                   HorizontalAlignment="Right"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>
+    <Border Classes="dev-card">
+        <Grid RowDefinitions="Auto,*">
+            <TextBlock Grid.Row="0"
+                       Text="О разработчике"
+                       Classes="h3"/>
+            <ItemsControl Grid.Row="1"
+                          ItemsSource="{Binding DeveloperDetails}"
+                          Classes="dev-card-list">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"
+                                    Spacing="8"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:DeveloperDetail">
+                        <Border Classes="dev-card-item">
+                            <Grid>
+                                <TextBlock Text="{Binding Name}"
+                                           Classes="label"/>
+                                <TextBlock Text="{Binding Value}"
+                                           Classes="value"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Border>
 </UserControl>

@@ -24,13 +24,21 @@
     </Application.Resources>
     <Application.Styles>
         <FluentTheme />
+        <Style Selector="TextBlock.h3">
+            <Setter Property="Margin" Value="0 0 0 10"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
         <Style Selector="Window">
             <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Width" Value="800"/>
-            <Setter Property="Height" Value="400"/>
+            <Setter Property="Height" Value="450"/>
             <Setter Property="CanResize" Value="False"/>
             <Setter Property="WindowStartupLocation" Value="CenterScreen"/>
         </Style>
@@ -72,14 +80,6 @@
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         <Setter Property="VerticalAlignment" Value="Top"/>
                         <Setter Property="Padding" Value="24 60"/>
-                        <Style Selector="^ TextBlock.h3">
-                            <Setter Property="Margin" Value="0 0 0 10"/>
-                            <Setter Property="FontSize" Value="18"/>
-                            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                        </Style>
                         <Style Selector="^ TextBlock.p">
                             <Setter Property="Margin" Value="0"/>
                             <Setter Property="FontSize" Value="14"/>
@@ -121,10 +121,42 @@
                             </Style>
                         </Style>
                     </Style>
+                    <Style Selector="^ Border.dev-card">
+                        <Setter Property="MaxWidth" Value="520"/>
+                        <Setter Property="Padding" Value="24"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+                        <Setter Property="CornerRadius" Value="8"/>
+                        <Setter Property="Background" Value="#fafbfc"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                        <Style Selector="^ ItemsControl.dev-card-list">
+                            <Setter Property="Margin" Value="0"/>
+                            <Style Selector="^ Border.dev-card-item">
+                                <Setter Property="Padding" Value="10 6"/>
+                                <Setter Property="Background" Value="#fff"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+                                <Setter Property="CornerRadius" Value="6"/>
+                                <Style Selector="^ TextBlock.label">
+                                    <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                </Style>
+                                <Style Selector="^ TextBlock.value">
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </Style>
+                        </Style>
+                    </Style>
                 </Style>
             </Style>
             <Style Selector="^ ContentControl.auth-panel">
             </Style>
+        </Style>
+        <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="0"/>
         </Style>
     </Application.Styles>
 </Application>
