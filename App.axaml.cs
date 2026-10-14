@@ -37,8 +37,12 @@ public partial class App : Application
 
         collection.AddTransient<RegisterDialogViewModel>();
         collection.AddTransient<RegisterDialog>();
+        collection.AddTransient<Func<RegisterDialog>>(provider =>
+        {
+            return provider.GetRequiredService<RegisterDialog>;
+        });
 
-        collection.AddSingleton<MainViewModel>();
+            collection.AddSingleton<MainViewModel>();
         collection.AddSingleton<MainWindow>();
 
         Services = collection.BuildServiceProvider();

@@ -1,14 +1,20 @@
 ﻿using Alexander_Yurtaev.AvaloniaAuth.Models;
 using Alexander_Yurtaev.AvaloniaAuth.Views;
 using Avalonia.Controls;
-using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.Services;
 
 public class DialogService : IDialogService
 {
+    private readonly Func<RegisterDialog> _factory;
     private Window? _currentDialog;
+
+    public DialogService(Func<RegisterDialog> factory)
+    {
+        _factory = factory;
+    }
 
     public void CloseCurrentDialog(object? dialogResult)
     {
@@ -19,7 +25,7 @@ public class DialogService : IDialogService
 
     public async Task<UserForLogin?> ShowRegisterDialog(Window owner)
     {
-        _currentDialog = App.Services!.GetRequiredService<RegisterDialog>();
+        _currentDialog = _factory();
         var user = await _currentDialog.ShowDialog<UserForLogin?>(owner);
         return user;
     }
