@@ -16,13 +16,15 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
     private CancellationTokenSource? _cts;
 
     [ObservableProperty]
-    private AuthorizedModel? _model;
+    private string _title = "Вы вошли как";
+
+    [ObservableProperty]
+    private string _message = string.Empty;
 
     public AuthorizedViewModel(IAuthService authService)
     {
         IsActive = true;
         _authService = authService;
-        Model = GetModel();
     }
 
     public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
@@ -51,13 +53,8 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
 
     public void Receive(ValueChangedMessage<UserDetails?> message)
     {
-        Model = GetModel();
-    }
-
-    private AuthorizedModel? GetModel()
-    {
-        return (_authService.User is not null) 
-            ? new AuthorizedModel(_authService.User.Email) 
-            : null;
+        Message = (_authService.IsAuthorized)
+            ? _authService.User!.Email
+            : string.Empty;
     }
 }

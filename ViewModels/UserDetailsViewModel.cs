@@ -13,14 +13,6 @@ public partial class UserDetailsViewModel : ObservableObject
 {
     private const string DefaultAvatar = "avares://Alexander_Yurtaev.AvaloniaAuth/Assets/AvatarBase.png";
 
-    /// <summary>
-    /// Конструктор только для того, чтобы дизайнер не выдавал ошибку
-    /// </summary>
-    public UserDetailsViewModel()
-    {
-        Model = null!;
-    }
-
     public UserDetailsViewModel(UserDetails details)
     {
         Model = details;

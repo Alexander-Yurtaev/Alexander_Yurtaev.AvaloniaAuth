@@ -16,9 +16,9 @@
       <StackPanel Grid.Row="1"
                   VerticalAlignment="Top"
                   Orientation="Vertical">
-          <TextBlock Text="{Binding Model.Title}"
+          <TextBlock Text="{Binding Title}"
                      Classes="logged-in-info strong"/>
-          <TextBlock Text="{Binding Model.Message}"
+          <TextBlock Text="{Binding Message}"
                      Classes="logged-in-info"/>
       </StackPanel>
       <Button Grid.Row="2"
