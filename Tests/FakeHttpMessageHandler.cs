@@ -9,6 +9,8 @@ namespace Alexander_Yurtaev.AvaloniaAuth.Tests;
 
 public class FakeHttpMessageHandler : HttpMessageHandler
 {
+    const string accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMTIwMDAwIiwiZW1haWwiOiJoYXlkZW4uemFtYW4uNDE0QGZha2VhcGlmb3JkZXZzLmNvbSIsIm5hbWUiOiJIYXlkZW4gWmFtYW4iLCJyb2xlIjoiYWRtaW4iLCJ0eXAiOiJhY2Nlc3MiLCJpYXQiOjE3OTIwMDgzOTQsImV4cCI6MTc5MjAwOTI5NH0.TIdtLFwa1nyg7qKE4PQBfj4VAkU0e5gzNnBCercsY04";
+
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         HttpResponseMessage message = new()
@@ -97,9 +99,9 @@ $$"""
 
         message.StatusCode = HttpStatusCode.OK;
         message.Content = new StringContent(
-"""
+$$"""
 {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMTIwMDAwIiwiZW1haWwiOiJoYXlkZW4uemFtYW4uNDE0QGZha2VhcGlmb3JkZXZzLmNvbSIsIm5hbWUiOiJIYXlkZW4gWmFtYW4iLCJyb2xlIjoiYWRtaW4iLCJ0eXAiOiJhY2Nlc3MiLCJpYXQiOjE3OTIwMDgzOTQsImV4cCI6MTc5MjAwOTI5NH0.TIdtLFwa1nyg7qKE4PQBfj4VAkU0e5gzNnBCercsY04",
+  "access_token": "{{accessToken}}",
   "refresh_token": "rt_mock_96ba5845d0454cf1894a8e8f2d52ee46",
   "token_type": "Bearer",
   "expires_in": 900,
@@ -118,6 +120,19 @@ $$"""
         if (request.Content is not null)
         {
             message.StatusCode = HttpStatusCode.InternalServerError;
+            return;
+        }
+
+        if (request.Headers.Authorization is null)
+        {
+            message.StatusCode = HttpStatusCode.NonAuthoritativeInformation;
+            return;
+        }
+
+        if (request.Headers.Authorization.Scheme != "Bearer" ||
+            request.Headers.Authorization.Parameter != accessToken)
+        {
+            message.StatusCode = HttpStatusCode.NonAuthoritativeInformation;
             return;
         }
 
