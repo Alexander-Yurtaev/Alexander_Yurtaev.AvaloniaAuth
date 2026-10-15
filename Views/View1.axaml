@@ -23,13 +23,13 @@
                 </StackPanel>
             </Border>
         </DataTemplate>
-        <DataTemplate DataType="models:User">
+        <DataTemplate DataType="viewmodels:UserDetailsViewModel">
             <Border Classes="user-card">
                 <StackPanel Orientation="Horizontal"
                             Classes="user-card">
                     <Border Classes="avatar">
                         <Border.Background>
-                            <ImageBrush Source="avares://Alexander_Yurtaev.AvaloniaAuth/Assets/AvatarBase.png"
+                            <ImageBrush Source="{Binding Avatar}"
                                         Stretch="UniformToFill"
                                         AlignmentX="Center"
                                         AlignmentY="Center"/>
@@ -46,7 +46,7 @@
                         <TextBlock Grid.Column="1"
                                    Grid.Row="0"
                                    Classes="value"
-                                   Text="{Binding Id}"/>
+                                   Text="{Binding Model.Id}"/>
 
                         <TextBlock Grid.Column="0"
                                    Grid.Row="1"
@@ -55,7 +55,7 @@
                         <TextBlock Grid.Column="1"
                                    Grid.Row="1"
                                    Classes="value"
-                                   Text="{Binding Email}"/>
+                                   Text="{Binding Model.Email}"/>
 
                         <TextBlock Grid.Column="0"
                                    Grid.Row="2"
@@ -64,7 +64,7 @@
                         <TextBlock Grid.Column="1"
                                    Grid.Row="2"
                                    Classes="value"
-                                   Text="{Binding Name}"/>
+                                   Text="{Binding Model.Name}"/>
 
                         <TextBlock Grid.Column="0"
                                    Grid.Row="3"
@@ -73,7 +73,7 @@
                         <TextBlock Grid.Column="1"
                                    Grid.Row="3"
                                    Classes="value"
-                                   Text="{Binding Role}"/>
+                                   Text="{Binding Model.Role}"/>
                     </Grid>
                 </StackPanel>
             </Border>

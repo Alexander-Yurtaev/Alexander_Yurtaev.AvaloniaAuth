@@ -72,7 +72,7 @@ public class DataProvider : IDataProvider
         return new TokensModel(result.AccessToken, result.RefreshToken);
     }
 
-    public async Task<User?> GetUserAsync(string accessToken, CancellationToken ct)
+    public async Task<UserDetails?> GetUserAsync(string accessToken, CancellationToken ct)
     {
         var client = _clientFactory.CreateClient("fakeapifordevs");
         HttpRequestMessage request = new(method: HttpMethod.Get, requestUri: "/api/auth/me?page=1&per_page=5");
@@ -92,7 +92,7 @@ public class DataProvider : IDataProvider
             Console.WriteLine(result.Error);
             return null;
         }
-        return new User(result.Id, result.Email, result.Name, result.Avatar, result.Role);
+        return new UserDetails(result.Id, result.Email, result.Name, result.Avatar, result.Role);
     }
 
     public async Task<bool?> LogoutAsync(string refreshToken, CancellationToken ct)

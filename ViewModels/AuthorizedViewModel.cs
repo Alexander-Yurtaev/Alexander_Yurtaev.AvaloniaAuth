@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 
-public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<User?>>
+public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<UserDetails?>>
 {
     private readonly IAuthService _authService;
 
@@ -29,7 +29,7 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
         await _authService.LogoutAsync(CancellationToken.None);
     }
 
-    public void Receive(ValueChangedMessage<User?> message)
+    public void Receive(ValueChangedMessage<UserDetails?> message)
     {
         Model = GetModel();
     }

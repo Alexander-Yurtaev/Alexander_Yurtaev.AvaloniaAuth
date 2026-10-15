@@ -8,7 +8,7 @@ using System;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 
-public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<User?>>
+public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<UserDetails?>>
 {
     private readonly AuthorizedViewModel _authorizedViewModel;
     private readonly Func<LoginViewModel> _loginViewModelFactory;
@@ -29,7 +29,7 @@ public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChange
         Content = GetContent();
     }
 
-    public void Receive(ValueChangedMessage<User?> message)
+    public void Receive(ValueChangedMessage<UserDetails?> message)
     {
         Content = GetContent();
     }

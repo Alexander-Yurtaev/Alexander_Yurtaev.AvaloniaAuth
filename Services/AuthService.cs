@@ -19,7 +19,7 @@ public class AuthService : ObservableObject, IAuthService
 
     public bool IsAuthorized => User is not null;
     
-    public User? User { get; private set; }
+    public UserDetails? User { get; private set; }
 
     public async Task<bool?> RegisterAsync(string email, string name, string password, CancellationToken ct)
     {
@@ -47,7 +47,7 @@ public class AuthService : ObservableObject, IAuthService
             _tokensModel = new TokensModel(tokensModel.AccessToken, tokensModel.RefreshToken);
             var user = await _dataProvider.GetUserAsync(_tokensModel.AccessToken, ct);
             User = user;
-            WeakReferenceMessenger.Default.Send(new ValueChangedMessage<User?>(User));
+            WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
         }
     }
 
@@ -59,13 +59,13 @@ public class AuthService : ObservableObject, IAuthService
         //return User;
 
         User = await _dataProvider.GetUserAsync(_tokensModel.AccessToken, ct);
-        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<User?>(User));
+        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
     }
 
     public async Task LogoutAsync(CancellationToken ct)
     {
         await _dataProvider.LogoutAsync(_tokensModel.RefreshToken, ct);
         User = null;
-        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<User?>(User));
+        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
     }
 }

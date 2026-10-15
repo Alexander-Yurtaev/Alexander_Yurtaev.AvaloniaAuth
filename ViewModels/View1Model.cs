@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.Messaging.Messages;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 
-public partial class View1Model : ObservableRecipient, IRecipient<ValueChangedMessage<User?>>
+public partial class View1Model : ObservableRecipient, IRecipient<ValueChangedMessage<UserDetails?>>
 {
     private readonly IAuthService _authService;
     private readonly UnAuthorizedModel _unAthorizedModel;
@@ -19,14 +19,16 @@ public partial class View1Model : ObservableRecipient, IRecipient<ValueChangedMe
         Content = GetContent();
     }
 
-    public void Receive(ValueChangedMessage<User?> message)
+    public void Receive(ValueChangedMessage<UserDetails?> message)
     {
         Content = GetContent();
     }
 
     private object? GetContent()
     {
-        return _authService.IsAuthorized ? _authService.User : _unAthorizedModel;
+        return _authService.IsAuthorized
+            ? new UserDetailsViewModel(_authService.User!)
+            : _unAthorizedModel;
     }
 
     [ObservableProperty]
