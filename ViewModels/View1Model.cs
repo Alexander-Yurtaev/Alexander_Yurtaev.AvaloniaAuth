@@ -9,13 +9,11 @@ namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 public partial class View1Model : ObservableRecipient, IRecipient<ValueChangedMessage<UserDetails?>>
 {
     private readonly IAuthService _authService;
-    private readonly UnAuthorizedModel _unAthorizedModel;
 
     public View1Model(IAuthService authService)
     {
         IsActive = true;
         _authService = authService;
-        _unAthorizedModel = new UnAuthorizedModel();
         Content = GetContent();
     }
 
@@ -28,7 +26,7 @@ public partial class View1Model : ObservableRecipient, IRecipient<ValueChangedMe
     {
         return _authService.IsAuthorized
             ? new UserDetailsViewModel(_authService.User!)
-            : _unAthorizedModel;
+            : new UnAuthorizedModel();
     }
 
     [ObservableProperty]
