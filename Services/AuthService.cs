@@ -10,7 +10,7 @@ namespace Alexander_Yurtaev.AvaloniaAuth.Services;
 public class AuthService : ObservableObject, IAuthService
 {
     private readonly IDataProvider _dataProvider;
-    private TokensModel _tokensModel;
+    private TokensModel? _tokensModel;
 
     public AuthService(IDataProvider dataProvider)
     {
@@ -58,13 +58,13 @@ public class AuthService : ObservableObject, IAuthService
         //User = new User(id, email, $"User_{id}", source, $"Role_{id}");
         //return User;
 
-        User = await _dataProvider.GetUserAsync(_tokensModel.AccessToken, ct);
+        User = await _dataProvider.GetUserAsync(_tokensModel!.AccessToken, ct);
         WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
     }
 
     public async Task LogoutAsync(CancellationToken ct)
     {
-        await _dataProvider.LogoutAsync(_tokensModel.RefreshToken, ct);
+        await _dataProvider.LogoutAsync(_tokensModel!.RefreshToken, ct);
         User = null;
         WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
     }

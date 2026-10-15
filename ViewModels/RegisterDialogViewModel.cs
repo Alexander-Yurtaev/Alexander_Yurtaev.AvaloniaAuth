@@ -2,7 +2,6 @@
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +24,7 @@ public partial class RegisterDialogViewModel : ObservableValidator
     [NotifyDataErrorInfo]
     [Required(ErrorMessage = "Введите Email.")]
     [EmailAddress(ErrorMessage = "Введите валидный Email.")]
-    private string _email;
+    private string _email = string.Empty;
 
     partial void OnEmailChanged(string value)
     {
@@ -35,7 +34,7 @@ public partial class RegisterDialogViewModel : ObservableValidator
 
     [ObservableProperty]
     [Required(ErrorMessage = "Введите Имя.")]
-    private string _name;
+    private string _name = string.Empty;
 
     partial void OnNameChanged(string value)
     {
@@ -46,7 +45,7 @@ public partial class RegisterDialogViewModel : ObservableValidator
     [ObservableProperty]
     [Required(ErrorMessage = "Введите пароль.")]
     [MinLength(length: 8, ErrorMessage = "Минимум 8 символов")]
-    private string _password;
+    private string _password = string.Empty;
 
     partial void OnPasswordChanged(string value)
     {

@@ -28,7 +28,7 @@ public partial class LoginViewModel : ObservableValidator
     [NotifyDataErrorInfo]
     [Required(ErrorMessage = "Введите Email.")]
     [EmailAddress(ErrorMessage = "Введите валидный Email.")]
-    private string _email;
+    private string _email = string.Empty;
 
     partial void OnEmailChanged(string value)
     {
@@ -39,7 +39,7 @@ public partial class LoginViewModel : ObservableValidator
     [ObservableProperty]
     [Required(ErrorMessage = "Введите пароль.")]
     [MinLength(length: 8, ErrorMessage = "Минимум 8 символов")]
-    private string _password;
+    private string _password = string.Empty;
 
     partial void OnPasswordChanged(string value)
     {
