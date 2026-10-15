@@ -2,6 +2,7 @@
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ public partial class RegisterDialogViewModel : ObservableValidator
         _authService = authService;
         _dialogService = dialogService;
     }
+
+    public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+    [ObservableProperty]
+    private string _errorMessage = string.Empty;
 
     [ObservableProperty]
     [NotifyDataErrorInfo]
@@ -66,23 +72,34 @@ public partial class RegisterDialogViewModel : ObservableValidator
         _cts = null;
     }
 
-    [RelayCommand(CanExecute = nameof(CanSubmit))]
+    [RelayCommand(CanExecute = nameof(CanRegister))]
     public async Task Register()
     {
-        _cts?.Cancel();
-        _cts = new CancellationTokenSource();
-
-        ValidateAllProperties();
-        if (HasErrors)
-            return;
-        
-        var result = await _authService.RegisterAsync(Email, Name, Password, _cts.Token);
-        if (result == true)
+        try
         {
-            var user = new UserForLogin(Email, Password);
-            _dialogService.CloseCurrentDialog(user);
-        }        
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+
+            ValidateAllProperties();
+            if (HasErrors)
+                return;
+
+            var result = await _authService.RegisterAsync(Email, Name, Password, _cts.Token);
+            if (result == true)
+            {
+                var user = new UserForLogin(Email, Password);
+                _dialogService.CloseCurrentDialog(user);
+            }
+        }
+        catch (TaskCanceledException) { }
+        catch (OperationCanceledException) { }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            ErrorMessage = ex.Message;
+            OnPropertyChanged(nameof(HasErrorMessage));
+        }
     }
 
-    private bool CanSubmit() => !HasErrors && !RegisterCommand.IsRunning;
+    private bool CanRegister() => !HasErrors && !RegisterCommand.IsRunning;
 }

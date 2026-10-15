@@ -9,8 +9,13 @@
         Title="Регистрация"
         x:Name="RegisterDlg">
 
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="Auto,*,Auto">
         <Border Grid.Row="0"
+                Classes="error-banner"
+                IsVisible="{Binding HasErrorMessage}">
+            <TextBlock Text="{Binding ErrorMessage}" />
+        </Border>
+        <Border Grid.Row="1"
                 Classes="modal-body"
                 IsEnabled="{Binding !RegisterCommand.IsRunning}">
             <Grid RowDefinitions="Auto,Auto,Auto">
@@ -38,7 +43,7 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <Border Grid.Row="2"
+        <Border Grid.Row="3"
                 Classes="modal-footer">
             <StackPanel Classes="modal-footer">
                 <Button Content="Закрыть"
