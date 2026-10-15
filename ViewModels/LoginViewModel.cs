@@ -80,11 +80,11 @@ public partial class LoginViewModel : ObservableValidator
         try
         {
             var owner = _mainWindowFactory();
-            var user = await _dialogService.ShowRegisterDialog(owner);
-            if (user is not null)
+            var registeredUserDto = await _dialogService.ShowRegisterDialog(owner);
+            if (registeredUserDto is not null)
             {
-                Email = user.Email;
-                Password = user.Password;
+                Email = registeredUserDto.Email;
+                Password = registeredUserDto.Password;
                 await LoginCommand.ExecuteAsync(null);
             }
         }

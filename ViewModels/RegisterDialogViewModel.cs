@@ -1,4 +1,5 @@
-﻿using Alexander_Yurtaev.AvaloniaAuth.Models;
+﻿using Alexander_Yurtaev.AvaloniaAuth.Dto;
+using Alexander_Yurtaev.AvaloniaAuth.Models;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -87,7 +88,7 @@ public partial class RegisterDialogViewModel : ObservableValidator
             var result = await _authService.RegisterAsync(Email, Name, Password, _cts.Token);
             if (result == true)
             {
-                var user = new UserForLogin(Email, Password);
+                var user = new RegisteredUserDto(Email, Password);
                 _dialogService.CloseCurrentDialog(user);
             }
         }

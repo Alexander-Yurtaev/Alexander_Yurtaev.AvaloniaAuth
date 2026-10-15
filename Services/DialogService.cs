@@ -1,4 +1,4 @@
-﻿using Alexander_Yurtaev.AvaloniaAuth.Models;
+﻿using Alexander_Yurtaev.AvaloniaAuth.Dto;
 using Alexander_Yurtaev.AvaloniaAuth.Views;
 using Avalonia.Controls;
 using System;
@@ -23,10 +23,10 @@ public class DialogService : IDialogService
         _currentDialog = null;
     }
 
-    public async Task<UserForLogin?> ShowRegisterDialog(Window owner)
+    public async Task<RegisteredUserDto?> ShowRegisterDialog(Window owner)
     {
         _currentDialog = _registerDialogFactory();
-        var user = await _currentDialog.ShowDialog<UserForLogin?>(owner);
-        return user;
+        var registeredUserDto = await _currentDialog.ShowDialog<RegisteredUserDto?>(owner);
+        return registeredUserDto;
     }
 }
