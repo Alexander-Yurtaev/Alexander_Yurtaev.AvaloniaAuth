@@ -44,12 +44,11 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
             <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="CanResize" Value="False"/>
             <Setter Property="WindowStartupLocation" Value="CenterScreen"/>
         </Style>
         <Style Selector="Window#MainWnd">
-            <Setter Property="Width" Value="800"/>
-            <Setter Property="Height" Value="450"/>
+            <!--<Setter Property="Width" Value="800"/>
+            <Setter Property="Height" Value="450"/>-->
         </Style>
         <Style Selector="Border.main-toolbar">
             <Setter Property="Padding" Value="18 12"/>
@@ -82,7 +81,7 @@
                 <Setter Property="Background" Value="#fff"/>
             </Style>
             <Style Selector="^ ContentControl.content-panel">
-                <Setter Property="MinWidth" Value="480"/>
+                <!--<Setter Property="MinWidth" Value="480"/>-->
                 <Style Selector="^ UserControl.content-view">
                     <Setter Property="Padding" Value="20"/>
                     <Style Selector="^ Border.auth_hint">
@@ -123,7 +122,7 @@
                             </Style>
                             <Style Selector="^ TextBlock.label">
                                 <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
-                                <Setter Property="MinWidth" Value="60"/>
+                                <!--<Setter Property="MinWidth" Value="60"/>-->
                             </Style>
                             <Style Selector="^ TextBlock.value">
                                 <Setter Property="FontWeight" Value="500"/>
@@ -186,10 +185,14 @@
             </Style>
             <Style Selector="^ TextBox">
                 <Setter Property="Padding" Value="10 8"/>
+                <Setter Property="Margin" Value="0 0 0 20"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
                 <Setter Property="CornerRadius" Value="6"/>
                 <Setter Property="FontSize" Value="13"/>
+                <Style Selector="^:error">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
             </Style>
         </Style>
         <Style Selector="Button">

@@ -42,12 +42,13 @@
         </Border>
         <Border Grid.Row="1"
                 Classes="main-body">
-            <Grid ColumnDefinitions="3*,*"
+            <Grid ColumnDefinitions="8*,5,3*"
                   ColumnSpacing="10">
                 <ContentControl Grid.Column="0"
                                 Classes="content-panel-base content-panel"
                                 Content="{Binding SectionManager.ViewModel}"/>
-                <views:AuthView Grid.Column="1"
+                <GridSplitter Grid.Column="1"/>
+                <views:AuthView Grid.Column="2"
                                 DataContext="{Binding AuthViewModel}"/>
             </Grid>
         </Border>

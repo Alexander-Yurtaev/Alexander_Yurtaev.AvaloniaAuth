@@ -45,7 +45,7 @@ public partial class RegisterDialogViewModel : ObservableValidator
 
     [ObservableProperty]
     [Required(ErrorMessage = "Введите пароль.")]
-    [MinLength(length: 8, ErrorMessage = "Длинна пароля должна быть не меньше 8 символов.")]
+    [MinLength(length: 8, ErrorMessage = "Минимум 8 символов")]
     private string _password;
 
     partial void OnPasswordChanged(string value)
