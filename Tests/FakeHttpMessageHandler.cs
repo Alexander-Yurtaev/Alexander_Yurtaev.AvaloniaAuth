@@ -19,10 +19,13 @@ public class FakeHttpMessageHandler : HttpMessageHandler
         {
             if (request.RequestUri?.AbsolutePath == "/api/auth/register")
             {
+                //message.StatusCode = HttpStatusCode.OK;
+                //await Task.Delay(5000);
                 await ProcessRegisterRequest(request, message);
             }
             else if (request.RequestUri?.AbsolutePath == "/api/auth/login")
             {
+                //await Task.Delay(5000);
                 await ProcessLoginRequest(request, message);
             }
             else if (request.RequestUri?.AbsolutePath == "/api/auth/logout")

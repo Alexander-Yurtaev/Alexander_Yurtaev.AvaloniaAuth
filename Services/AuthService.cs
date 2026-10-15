@@ -8,7 +8,6 @@ using System;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.Services;
 
@@ -77,9 +76,18 @@ public class AuthService : ObservableObject, IAuthService
 
     public async Task LogoutAsync(CancellationToken ct)
     {
-        await _dataProvider.LogoutAsync(_tokensModel!.RefreshToken, ct);
+        var response = await _dataProvider.LogoutAsync(_tokensModel!.AccessToken, ct)
+            ??
+            throw new NoNullAllowedException("Произошла ошибка");
+
+        if (!response.Success)
+        {
+            throw new InvalidOperationException(response.Message);
+        }
+
         UserInfo = null;
         _tokensModel = null;
+
         WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(UserInfo));
     }
 }

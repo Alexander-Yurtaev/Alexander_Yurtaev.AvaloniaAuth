@@ -9,5 +9,5 @@ public interface IDataProvider
     Task<RegisterResponse?> RegisterAsync(string email, string name, string password, CancellationToken ct);
     Task<LoginResponse?> LoginAsync(string email, string password, CancellationToken ct);
     Task<MeResponse?> GetUserAsync(string accessToken, CancellationToken ct);
-    Task<bool?> LogoutAsync(string refreshToken, CancellationToken ct);
+    Task<LogoutResponse?> LogoutAsync(string refreshToken, CancellationToken ct);
 }

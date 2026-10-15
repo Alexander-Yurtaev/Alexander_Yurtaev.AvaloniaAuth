@@ -71,7 +71,6 @@ public class DataProvider : IDataProvider
         } else if (!string.IsNullOrEmpty(result.Error))
         {
             Console.WriteLine(result.Error);
-            return null;
         }
         return result;
     }
@@ -98,12 +97,11 @@ public class DataProvider : IDataProvider
         else if (!string.IsNullOrEmpty(result.Error))
         {
             Console.WriteLine(result.Error);
-            return null;
         }
         return result;
     }
 
-    public async Task<bool?> LogoutAsync(string refreshToken, CancellationToken ct)
+    public async Task<LogoutResponse?> LogoutAsync(string refreshToken, CancellationToken ct)
     {
         var client = _clientFactory.CreateClient("fakeapifordevs");
         HttpRequestMessage request = new(method: HttpMethod.Post, requestUri: "/api/auth/logout?page=1&per_page=5");
@@ -114,24 +112,22 @@ public class DataProvider : IDataProvider
 
         var response = await client.SendAsync(request, ct);
         response.EnsureSuccessStatusCode();
+
+        if (response.Content.Headers.ContentLength == 0)
+        {
+            Console.WriteLine("Пришли пустые данные");
+            throw new InvalidOperationException("Пришли пустые данные");
+        }
+
         var result = await response.Content.ReadFromJsonAsync<LogoutResponse>(ct);
         if (result is null)
         {
             Console.WriteLine($"{nameof(LogoutResponse)} is null");
-            return false;
         }
-
-        if (!result.Success)
+        else if (!result.Success)
         {
             Console.WriteLine(result.Message);
-            return false;
         }
-
-        if (!string.IsNullOrEmpty(result.Error))
-        {
-            Console.WriteLine(result.Error);
-            return false;
-        }
-        return true;
+        return result;
     }
 }
