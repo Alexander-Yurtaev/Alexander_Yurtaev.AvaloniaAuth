@@ -83,7 +83,9 @@ public partial class LoginViewModel : ObservableValidator
             var user = await _dialogService.ShowRegisterDialog(owner);
             if (user is not null)
             {
-                await _authService.LoginAsync(user.Email, user.Password, CancellationToken.None);
+                Email = user.Email;
+                Password = user.Password;
+                await LoginCommand.ExecuteAsync(null);
             }
         }
         catch (OperationCanceledException) { }
