@@ -91,7 +91,6 @@ public partial class RegisterDialogViewModel : ObservableValidator
                 _dialogService.CloseCurrentDialog(user);
             }
         }
-        catch (TaskCanceledException) { }
         catch (OperationCanceledException) { }
         catch (Exception ex)
         {

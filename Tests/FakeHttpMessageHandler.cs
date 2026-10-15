@@ -15,7 +15,6 @@ public class FakeHttpMessageHandler : HttpMessageHandler
         {
             StatusCode = HttpStatusCode.NotFound
         };
-        return message;
         if (request.Method == HttpMethod.Post)
         {
             if (request.RequestUri?.AbsolutePath == "/api/auth/register")
@@ -44,7 +43,6 @@ public class FakeHttpMessageHandler : HttpMessageHandler
 
     private async Task ProcessRegisterRequest(HttpRequestMessage request, HttpResponseMessage message)
     {
-        await Task.Delay(5000);
         string email = "";
         string name = "";
 
@@ -83,7 +81,6 @@ $$"""
 
     private async Task ProcessLoginRequest(HttpRequestMessage request, HttpResponseMessage message)
     {
-        await Task.Delay(5000);
         if (request.Content is not null)
         {
             var bodyString = await request.Content.ReadAsStringAsync();
@@ -115,7 +112,6 @@ $$"""
 
     private async Task ProcessMeRequest(HttpRequestMessage request, HttpResponseMessage message)
     {
-        await Task.Delay(5000);
         if (request.Content is not null)
         {
             message.StatusCode = HttpStatusCode.InternalServerError;

@@ -6,9 +6,14 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Alexander_Yurtaev.AvaloniaAuth.Views.AuthorizedView"
              x:DataType="viewmodels:AuthorizedViewModel">
-  <Grid RowDefinitions="Auto,*"
+  <Grid RowDefinitions="Auto,Auto,*"
         Classes="auth-state">
-      <StackPanel Grid.Row="0"
+      <Border Grid.Row="0"
+                Classes="error-banner"
+                IsVisible="{Binding HasErrorMessage}">
+            <TextBlock Text="{Binding ErrorMessage}" />
+        </Border>
+      <StackPanel Grid.Row="1"
                   VerticalAlignment="Top"
                   Orientation="Vertical">
           <TextBlock Text="{Binding Model.Title}"
@@ -16,7 +21,7 @@
           <TextBlock Text="{Binding Model.Message}"
                      Classes="logged-in-info"/>
       </StackPanel>
-      <Button Grid.Row="1"
+      <Button Grid.Row="2"
               Content="Выйти"
               Command="{Binding LogoutCommand}"
               Classes="Button"

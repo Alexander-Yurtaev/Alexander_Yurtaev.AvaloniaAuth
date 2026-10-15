@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<UserDetails?>>
 {
     private readonly IAuthService _authService;
+    private CancellationTokenSource? _cts;
 
     [ObservableProperty]
     private AuthorizedModel? _model;
@@ -23,10 +25,28 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
         Model = GetModel();
     }
 
+    public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+    [ObservableProperty]
+    private string _errorMessage = string.Empty;
+
     [RelayCommand]
     public async Task Logout()
     {
-        await _authService.LogoutAsync(CancellationToken.None);
+        _cts?.Cancel();
+        _cts = new CancellationTokenSource();
+
+        try
+        {
+            await _authService.LogoutAsync(_cts.Token);
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            ErrorMessage = ex.Message;
+            OnPropertyChanged(nameof(HasErrorMessage));
+        }
     }
 
     public void Receive(ValueChangedMessage<UserDetails?> message)

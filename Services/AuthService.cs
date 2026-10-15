@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,12 +25,6 @@ public class AuthService : ObservableObject, IAuthService
     {
         var result = await _dataProvider.RegisterAsync(email, name, password, ct);
         return result;
-
-        //var id = new Random().Next(100);
-        //var source = @"avares://Alexander.Yurtaev.Avalonia.Auth;component/Assets/AvatarBase.png";
-        //User = new User(id, email, $"User_{id}", source, $"Role_{id}");
-        //WeakReferenceMessenger.Default.Send(new ValueChangedMessage<User?>(User));
-        //return await Task.FromResult(User != null);
     }
 
     public async Task LoginAsync(string email, string password, CancellationToken ct)
@@ -48,11 +41,6 @@ public class AuthService : ObservableObject, IAuthService
 
     public async Task LoadUserAsync(string accessToken, CancellationToken ct)
     {
-        //var id = new Random().Next(100);
-        //var source = @"avares://Alexander.Yurtaev.Avalonia.Auth;component/Assets/AvatarBase.png";
-        //User = new User(id, email, $"User_{id}", source, $"Role_{id}");
-        //return User;
-
         User = await _dataProvider.GetUserAsync(_tokensModel!.AccessToken, ct);
         WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
     }

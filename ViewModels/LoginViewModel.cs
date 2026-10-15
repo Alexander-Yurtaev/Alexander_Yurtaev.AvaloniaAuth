@@ -63,6 +63,7 @@ public partial class LoginViewModel : ObservableValidator
         {
             await _authService.LoginAsync(Email, Password, CancellationToken.None);
         }
+        catch (OperationCanceledException) { }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
@@ -76,11 +77,21 @@ public partial class LoginViewModel : ObservableValidator
     [RelayCommand(CanExecute = nameof(CanRegister))]
     public async Task Register()
     {
-        var owner = _mainWindowFactory();
-        var user = await _dialogService.ShowRegisterDialog(owner);
-        if (user is not null)
+        try
         {
-            await _authService.LoginAsync(user.Email, user.Password, CancellationToken.None);
+            var owner = _mainWindowFactory();
+            var user = await _dialogService.ShowRegisterDialog(owner);
+            if (user is not null)
+            {
+                await _authService.LoginAsync(user.Email, user.Password, CancellationToken.None);
+            }
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            ErrorMessage = ex.Message;
+            OnPropertyChanged(nameof(HasErrorMessage));
         }
     }
 
