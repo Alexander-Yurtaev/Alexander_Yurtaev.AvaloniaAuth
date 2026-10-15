@@ -76,7 +76,7 @@ public class DataProvider : IDataProvider
         return result;
     }
 
-    public async Task<UserDetails?> GetUserAsync(string accessToken, CancellationToken ct)
+    public async Task<MeResponse?> GetUserAsync(string accessToken, CancellationToken ct)
     {
         var client = _clientFactory.CreateClient("fakeapifordevs");
         HttpRequestMessage request = new(method: HttpMethod.Get, requestUri: "/api/auth/me?page=1&per_page=5");
@@ -84,19 +84,23 @@ public class DataProvider : IDataProvider
 
         var response = await client.SendAsync(request, ct);
         response.EnsureSuccessStatusCode();
+        if (response.Content.Headers.ContentLength == 0)
+        {
+            Console.WriteLine("Пришли пустые данные");
+            throw new InvalidOperationException("Пришли пустые данные");
+        }
+
         var result = await response.Content.ReadFromJsonAsync<MeResponse>(ct);
         if (result is null)
         {
             Console.WriteLine($"{nameof(MeResponse)} is null");
-            return null;
         }
-
-        if (!string.IsNullOrEmpty(result.Error))
+        else if (!string.IsNullOrEmpty(result.Error))
         {
             Console.WriteLine(result.Error);
             return null;
         }
-        return new UserDetails(result.Id, result.Email, result.Name, result.Avatar, result.Role);
+        return result;
     }
 
     public async Task<bool?> LogoutAsync(string refreshToken, CancellationToken ct)

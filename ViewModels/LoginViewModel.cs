@@ -62,6 +62,7 @@ public partial class LoginViewModel : ObservableValidator
         try
         {
             await _authService.LoginAsync(Email, Password, CancellationToken.None);
+            await _authService.LoadUserAsync(CancellationToken.None);
         }
         catch (OperationCanceledException) { }
         catch (Exception ex)

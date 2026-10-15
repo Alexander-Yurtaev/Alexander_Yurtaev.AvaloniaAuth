@@ -8,6 +8,7 @@ using System;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.Services;
 
@@ -61,7 +62,16 @@ public class AuthService : ObservableObject, IAuthService
 
     public async Task LoadUserAsync(CancellationToken ct)
     {
-        UserInfo = await _dataProvider.GetUserAsync(_tokensModel!.AccessToken, ct);
+        var response = await _dataProvider.GetUserAsync(_tokensModel!.AccessToken, ct)
+            ??
+            throw new NoNullAllowedException("Ошибка при авторизации");
+
+        if (!string.IsNullOrEmpty(response.Error))
+        {
+            throw new InvalidOperationException(response.Message);
+        }
+
+        UserInfo = new UserDetails(response.Id, response.Email, response.Name, response.Avatar, response.Role);
         WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(UserInfo));
     }
 
