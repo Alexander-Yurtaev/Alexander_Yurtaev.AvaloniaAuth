@@ -41,6 +41,11 @@ public partial class LoginViewModel : ObservableValidator
     [MinLength(length: 8, ErrorMessage = "Минимум 8 символов")]
     private string _password = string.Empty;
 
+    public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+    [ObservableProperty]
+    private string _errorMessage = string.Empty;
+
     partial void OnPasswordChanged(string value)
     {
         ValidateProperty(value, nameof(Password));
@@ -54,7 +59,16 @@ public partial class LoginViewModel : ObservableValidator
         if (HasErrors)
             return;
 
-        await _authService.LoginAsync(Email, Password, CancellationToken.None);
+        try
+        {
+            await _authService.LoginAsync(Email, Password, CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            ErrorMessage = ex.Message;
+            OnPropertyChanged(nameof(HasErrorMessage));
+        }
     }
 
     private bool CanLogin() => !HasErrors;

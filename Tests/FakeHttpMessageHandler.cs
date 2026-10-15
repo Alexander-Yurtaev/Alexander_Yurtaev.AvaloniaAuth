@@ -15,7 +15,7 @@ public class FakeHttpMessageHandler : HttpMessageHandler
         {
             StatusCode = HttpStatusCode.NotFound
         };
-
+        return message;
         if (request.Method == HttpMethod.Post)
         {
             if (request.RequestUri?.AbsolutePath == "/api/auth/register")
