@@ -27,12 +27,10 @@ public class AuthService : ObservableObject, IAuthService
 
     public async Task<RegisteredUserDto> RegisterAsync(string email, string name, string password, CancellationToken ct)
     {
-        var response = await _dataProvider.RegisterAsync(email, name, password, ct);
-        if (response is null)
-        {
+        var response = await _dataProvider.RegisterAsync(email, name, password, ct)
+            ?? 
             throw new NoNullAllowedException("Ошибка при регистрации");
-        }
-
+        
         if (!string.IsNullOrEmpty(response.Error))
         {
             throw new InvalidOperationException(response.Message);
