@@ -1,8 +1,11 @@
 ﻿using Alexander_Yurtaev.AvaloniaAuth.Data;
+using Alexander_Yurtaev.AvaloniaAuth.Dto;
 using Alexander_Yurtaev.AvaloniaAuth.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
+using System;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,9 +25,20 @@ public class AuthService : ObservableObject, IAuthService
     
     public UserDetails? User { get; private set; }
 
-    public async Task<bool?> RegisterAsync(string email, string name, string password, CancellationToken ct)
+    public async Task<RegisteredUserDto> RegisterAsync(string email, string name, string password, CancellationToken ct)
     {
-        var result = await _dataProvider.RegisterAsync(email, name, password, ct);
+        var response = await _dataProvider.RegisterAsync(email, name, password, ct);
+        if (response is null)
+        {
+            throw new NoNullAllowedException("Ошибка при регистрации");
+        }
+
+        if (!string.IsNullOrEmpty(response.Error))
+        {
+            throw new InvalidOperationException(response.Message);
+        }
+
+        var result = new RegisteredUserDto(response.Email, password);
         return result;
     }
 

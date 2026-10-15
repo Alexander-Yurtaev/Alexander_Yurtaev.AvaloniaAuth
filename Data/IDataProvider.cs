@@ -6,7 +6,7 @@ namespace Alexander_Yurtaev.AvaloniaAuth.Data;
 
 public interface IDataProvider
 {
-    Task<bool?> RegisterAsync(string email, string name, string password, CancellationToken ct);
+    Task<RegisterResponse?> RegisterAsync(string email, string name, string password, CancellationToken ct);
     Task<TokensModel?> LoginAsync(string email, string password, CancellationToken ct);
     Task<UserDetails?> GetUserAsync(string accessToken, CancellationToken ct);
     Task<bool?> LogoutAsync(string refreshToken, CancellationToken ct);

@@ -85,12 +85,8 @@ public partial class RegisterDialogViewModel : ObservableValidator
             if (HasErrors)
                 return;
 
-            var result = await _authService.RegisterAsync(Email, Name, Password, _cts.Token);
-            if (result == true)
-            {
-                var user = new RegisteredUserDto(Email, Password);
-                _dialogService.CloseCurrentDialog(user);
-            }
+            var registeredUserDto = await _authService.RegisterAsync(Email, Name, Password, _cts.Token);
+            _dialogService.CloseCurrentDialog(registeredUserDto);
         }
         catch (OperationCanceledException) { }
         catch (Exception ex)

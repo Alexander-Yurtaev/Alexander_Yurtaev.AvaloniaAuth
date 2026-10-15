@@ -19,7 +19,7 @@ public class DataProvider : IDataProvider
         _clientFactory = clientFactory;
     }
 
-    public async Task<bool?> RegisterAsync(string email, string name, string password, CancellationToken ct)
+    public async Task<RegisterResponse?> RegisterAsync(string email, string name, string password, CancellationToken ct)
     {
         var client = _clientFactory.CreateClient("fakeapifordevs");
         HttpRequestMessage request = new(method: HttpMethod.Post, requestUri: "/api/auth/register?page=1&per_page=5");
@@ -30,19 +30,21 @@ public class DataProvider : IDataProvider
 
         var response = await client.SendAsync(request, ct);
         response.EnsureSuccessStatusCode();
+        if (response.Content.Headers.ContentLength == 0)
+        {
+            Console.WriteLine("Пришли пустые данные");
+            throw new InvalidOperationException("Пришли пустые данные");
+        }
+
         var result = await response.Content.ReadFromJsonAsync<RegisterResponse>(ct);
         if (result is null)
         {
             Console.WriteLine($"{nameof(RegisterResponse)} is null");
-            return false;
-        }
-
-        if (!string.IsNullOrEmpty(result.Error))
+        } else if (!string.IsNullOrEmpty(result.Error))
         {
             Console.WriteLine(result.Error);
-            return false;
         }
-        return true;
+        return result;
     }
 
     public async Task<TokensModel?> LoginAsync(string email, string password, CancellationToken ct)
