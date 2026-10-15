@@ -10,6 +10,9 @@
         x:Name="RegisterDlg">
 
     <Grid RowDefinitions="Auto,*,Auto">
+        <ProgressBar Grid.Row="0"
+                     IsIndeterminate="True"
+                     IsVisible="{Binding RegisterCommand.IsRunning}"/>
         <Border Grid.Row="0"
                 Classes="error-banner"
                 IsVisible="{Binding HasErrorMessage}">
