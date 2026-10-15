@@ -27,7 +27,8 @@
                     <TextBox x:Name="NameTextBox"
                              Text="{Binding Name}"/>
                 </StackPanel>
-                <StackPanel Grid.Row="2">
+                <StackPanel Grid.Row="2"
+                            Classes="field">
                     <Label Content="Пароль"
                            Target="PasswordTextBox"/>
                     <TextBox x:Name="PasswordTextBox"
