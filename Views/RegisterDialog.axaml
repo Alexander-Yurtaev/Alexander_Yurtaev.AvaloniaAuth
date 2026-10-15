@@ -39,8 +39,12 @@
         <Border Grid.Row="3"
                 Classes="modal-footer">
             <StackPanel Classes="modal-footer">
+                <Button Content="Закрыть"
+                        Command="{Binding CloseCommand}"
+                        IsVisible="{Binding !RegisterCommand.IsRunning}"/>
                 <Button Content="Отмена"
-                        Command="{Binding CancelCommand}"/>
+                        Command="{Binding CancelCommand}"
+                        IsVisible="{Binding RegisterCommand.IsRunning}"/>
                 <Button Content="Зарегистрироваться"
                         Command="{Binding RegisterCommand}"
                         Classes="primary"/>

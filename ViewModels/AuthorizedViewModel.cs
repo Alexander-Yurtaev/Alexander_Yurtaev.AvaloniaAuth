@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
@@ -25,7 +26,7 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
     [RelayCommand]
     public async Task Logout()
     {
-        await _authService.LogoutAsync();
+        await _authService.LogoutAsync(CancellationToken.None);
     }
 
     public void Receive(ValueChangedMessage<User?> message)

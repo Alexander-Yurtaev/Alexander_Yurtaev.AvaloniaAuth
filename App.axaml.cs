@@ -1,5 +1,6 @@
 using Alexander_Yurtaev.AvaloniaAuth.Models;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
+using Alexander_Yurtaev.AvaloniaAuth.Tests;
 using Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 using Alexander_Yurtaev.AvaloniaAuth.Views;
 using Avalonia;
@@ -8,6 +9,9 @@ using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Alexander_Yurtaev.AvaloniaAuth;
 
@@ -27,6 +31,14 @@ public partial class App : Application
         collection.AddSingleton<IAuthService, AuthService>();
         collection.AddSingleton<IDialogService, DialogService>();
         collection.AddSingleton<ISectionManager, SectionManager>();
+        collection.AddSingleton<IDataProvider, DataProvider>();
+        collection.AddSingleton<FakeHttpMessageHandler>();
+        collection.AddHttpClient("fakeapifordevs", config =>
+            {
+                config.BaseAddress = new Uri("https://fakeapifordevs.vercel.app");
+                config.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
+            })
+            .ConfigurePrimaryHttpMessageHandler<FakeHttpMessageHandler>();
 
         collection.AddKeyedSingleton<ObservableRecipient, View1Model>("View1");
         collection.AddKeyedSingleton<ObservableObject, View2Model>("View2");
@@ -52,13 +64,13 @@ public partial class App : Application
         var sectionManager = Services.GetRequiredService<ISectionManager>();
         var sp = Services;
         sectionManager.Add(
-            "View1", 
+            "View1",
             new SectionViewModel("View1", "View1", sectionManager),
             sp.GetRequiredKeyedService<ObservableRecipient>);
-        
+
         sectionManager.Add(
-            "View2", 
-            new SectionViewModel("View2", "View2", sectionManager), 
+            "View2",
+            new SectionViewModel("View2", "View2", sectionManager),
             sp.GetRequiredKeyedService<ObservableObject>);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

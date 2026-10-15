@@ -2,7 +2,9 @@
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
@@ -11,6 +13,7 @@ public partial class RegisterDialogViewModel : ObservableValidator
 {
     private readonly IAuthService _authService;
     private readonly IDialogService _dialogService;
+    private CancellationTokenSource? _cts;
 
     public RegisterDialogViewModel(IAuthService authService, IDialogService dialogService)
     {
@@ -52,19 +55,29 @@ public partial class RegisterDialogViewModel : ObservableValidator
     }
 
     [RelayCommand]
-    public async Task Cancel()
+    public async Task Close()
     {
         _dialogService.CloseCurrentDialog(null);
+    }
+
+    [RelayCommand]
+    public async Task Cancel()
+    {
+        _cts?.Cancel();
+        _cts = null;
     }
 
     [RelayCommand(CanExecute = nameof(CanSubmit))]
     public async Task Register()
     {
+        _cts?.Cancel();
+        _cts = new CancellationTokenSource();
+
         ValidateAllProperties();
         if (HasErrors)
             return;
-
-        var result = await _authService.RegisterAsync(Email, Name, Password);
+        
+        var result = await _authService.RegisterAsync(Email, Name, Password, _cts.Token);
         if (result == true)
         {
             var user = new UserForLogin(Email, Password);
@@ -72,5 +85,5 @@ public partial class RegisterDialogViewModel : ObservableValidator
         }        
     }
 
-    private bool CanSubmit() => !HasErrors;
+    private bool CanSubmit() => !HasErrors && !RegisterCommand.IsRunning;
 }

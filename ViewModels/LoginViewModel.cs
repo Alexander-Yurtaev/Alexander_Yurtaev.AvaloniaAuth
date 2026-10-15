@@ -1,9 +1,9 @@
 ﻿using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
@@ -54,7 +54,7 @@ public partial class LoginViewModel : ObservableValidator
         if (HasErrors)
             return;
 
-        await _authService.LoginAsync(Email, Password);
+        await _authService.LoginAsync(Email, Password, CancellationToken.None);
     }
 
     private bool CanSubmit() => !HasErrors;
@@ -66,7 +66,7 @@ public partial class LoginViewModel : ObservableValidator
         var user = await _dialogService.ShowRegisterDialog(owner);
         if (user is not null)
         {
-            await _authService.LoginAsync(user.Email, user.Password);
+            await _authService.LoginAsync(user.Email, user.Password, CancellationToken.None);
         }
     }
 }
