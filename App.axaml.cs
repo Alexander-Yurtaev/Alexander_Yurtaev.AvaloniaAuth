@@ -1,5 +1,4 @@
 using Alexander_Yurtaev.AvaloniaAuth.Data;
-using Alexander_Yurtaev.AvaloniaAuth.Models;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using Alexander_Yurtaev.AvaloniaAuth.Tests;
 using Alexander_Yurtaev.AvaloniaAuth.ViewModels;
@@ -10,8 +9,6 @@ using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace Alexander_Yurtaev.AvaloniaAuth;
@@ -27,7 +24,7 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        const bool UseFakeHandler = true;
+        const bool UseFakeHandler = false;
 
         var collection = new ServiceCollection();
 

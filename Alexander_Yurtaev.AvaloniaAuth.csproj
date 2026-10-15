@@ -21,16 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!--<Resource Include="Assets\AvatarBase.png" />-->
 	<AvaloniaResource Include="Assets\AvatarBase.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Views\AuthorizedView.axaml.cs">
-      <DependentUpon>AuthorizedView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\AuthView.axaml.cs">
-      <DependentUpon>AuthView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>
