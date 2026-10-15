@@ -11,7 +11,8 @@
 
     <Grid RowDefinitions="*,Auto">
         <Border Grid.Row="0"
-                Classes="modal-body">
+                Classes="modal-body"
+                IsEnabled="{Binding !RegisterCommand.IsRunning}">
             <Grid RowDefinitions="Auto,Auto,Auto">
                 <StackPanel Classes="field"
                             Grid.Row="0">

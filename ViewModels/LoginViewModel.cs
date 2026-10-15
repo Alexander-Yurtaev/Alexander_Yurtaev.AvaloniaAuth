@@ -47,7 +47,7 @@ public partial class LoginViewModel : ObservableValidator
         LoginCommand.NotifyCanExecuteChanged();
     }
 
-    [RelayCommand(CanExecute = nameof(CanSubmit))]
+    [RelayCommand(CanExecute = nameof(CanLogin))]
     public async Task Login()
     {
         ValidateAllProperties();
@@ -57,9 +57,9 @@ public partial class LoginViewModel : ObservableValidator
         await _authService.LoginAsync(Email, Password, CancellationToken.None);
     }
 
-    private bool CanSubmit() => !HasErrors;
+    private bool CanLogin() => !HasErrors;
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanRegister))]
     public async Task Register()
     {
         var owner = _mainWindowFactory();
@@ -69,4 +69,6 @@ public partial class LoginViewModel : ObservableValidator
             await _authService.LoginAsync(user.Email, user.Password, CancellationToken.None);
         }
     }
+
+    private bool CanRegister() => !LoginCommand.IsRunning;
 }
