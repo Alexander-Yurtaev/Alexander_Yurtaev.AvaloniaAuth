@@ -30,11 +30,14 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
     public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasErrorMessage))]
     private string _errorMessage = string.Empty;
 
     [RelayCommand]
     public async Task Logout()
     {
+        ErrorMessage = string.Empty;
+
         _cts?.Cancel();
         _cts = new CancellationTokenSource();
 
@@ -45,9 +48,8 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
         catch (OperationCanceledException) { }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            ErrorMessage = ex.Message;
-            OnPropertyChanged(nameof(HasErrorMessage));
+            Console.WriteLine(ex);
+            ErrorMessage = ex.GetBaseException().Message;
         }
     }
 

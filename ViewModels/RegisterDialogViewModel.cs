@@ -25,6 +25,7 @@ public partial class RegisterDialogViewModel : ObservableValidator
     public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasErrorMessage))]
     private string _errorMessage = string.Empty;
 
     [ObservableProperty]
@@ -76,6 +77,8 @@ public partial class RegisterDialogViewModel : ObservableValidator
     [RelayCommand(CanExecute = nameof(CanRegister))]
     public async Task Register()
     {
+        ErrorMessage = string.Empty;
+
         try
         {
             _cts?.Cancel();
@@ -91,9 +94,8 @@ public partial class RegisterDialogViewModel : ObservableValidator
         catch (OperationCanceledException) { }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            ErrorMessage = ex.Message;
-            OnPropertyChanged(nameof(HasErrorMessage));
+            Console.WriteLine(ex);
+            ErrorMessage = ex.GetBaseException().Message;
         }
     }
 

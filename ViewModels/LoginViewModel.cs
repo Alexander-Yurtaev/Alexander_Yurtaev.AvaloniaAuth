@@ -44,6 +44,7 @@ public partial class LoginViewModel : ObservableValidator
     public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasErrorMessage))]
     private string _errorMessage = string.Empty;
 
     partial void OnPasswordChanged(string value)
@@ -55,6 +56,8 @@ public partial class LoginViewModel : ObservableValidator
     [RelayCommand(CanExecute = nameof(CanLogin))]
     public async Task Login()
     {
+        ErrorMessage = string.Empty;
+
         ValidateAllProperties();
         if (HasErrors)
             return;
@@ -67,9 +70,8 @@ public partial class LoginViewModel : ObservableValidator
         catch (OperationCanceledException) { }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            ErrorMessage = ex.Message;
-            OnPropertyChanged(nameof(HasErrorMessage));
+            Console.WriteLine(ex);
+            ErrorMessage = ex.GetBaseException().Message;
         }
     }
 
@@ -78,6 +80,9 @@ public partial class LoginViewModel : ObservableValidator
     [RelayCommand(CanExecute = nameof(CanRegister))]
     public async Task Register()
     {
+        ErrorMessage = string.Empty;
+        OnPropertyChanged(nameof(HasErrorMessage));
+
         try
         {
             var owner = _mainWindowFactory();
@@ -92,8 +97,8 @@ public partial class LoginViewModel : ObservableValidator
         catch (OperationCanceledException) { }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            ErrorMessage = ex.Message;
+            Console.WriteLine(ex);
+            ErrorMessage = ex.GetBaseException().Message;
             OnPropertyChanged(nameof(HasErrorMessage));
         }
     }
