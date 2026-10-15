@@ -1,3 +1,4 @@
+using Alexander_Yurtaev.AvaloniaAuth.Data;
 using Alexander_Yurtaev.AvaloniaAuth.Models;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using Alexander_Yurtaev.AvaloniaAuth.Tests;

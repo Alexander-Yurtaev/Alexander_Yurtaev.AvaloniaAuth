@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Alexander_Yurtaev.AvaloniaAuth.Services;
+namespace Alexander_Yurtaev.AvaloniaAuth.Data;
 
 public interface IDataProvider
 {
