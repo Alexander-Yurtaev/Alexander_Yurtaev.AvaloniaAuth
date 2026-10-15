@@ -8,6 +8,9 @@
              x:DataType="viewmodels:LoginViewModel">
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto"
           Classes="auth-state">
+        <ProgressBar Grid.Row="0"
+                     IsIndeterminate="True"
+                     IsVisible="{Binding LoginCommand.IsRunning}"/>
         <Border Grid.Row="0"
                 Classes="error-banner"
                 IsVisible="{Binding HasErrorMessage}">
