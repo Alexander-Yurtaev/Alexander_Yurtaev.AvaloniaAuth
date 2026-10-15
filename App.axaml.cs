@@ -26,6 +26,8 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        const bool UseFakeHandler = true;
+
         var collection = new ServiceCollection();
 
         collection.AddSingleton<IAuthService, AuthService>();
@@ -33,13 +35,19 @@ public partial class App : Application
         collection.AddSingleton<ISectionManager, SectionManager>();
         collection.AddSingleton<IDataProvider, DataProvider>();
         collection.AddSingleton<FakeHttpMessageHandler>();
-        collection.AddHttpClient("fakeapifordevs", config =>
+
+        var httpClientBuilder = collection.AddHttpClient("fakeapifordevs", config =>
             {
                 config.BaseAddress = new Uri("https://fakeapifordevs.vercel.app");
                 config.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
-            })
-            .ConfigurePrimaryHttpMessageHandler<FakeHttpMessageHandler>();
+            });
 
+        if (UseFakeHandler)
+        {
+            httpClientBuilder.ConfigurePrimaryHttpMessageHandler<FakeHttpMessageHandler>();
+        }
+
+        // Регистрируем ViewModel для разделов
         collection.AddKeyedSingleton<ObservableRecipient, View1Model>("View1");
         collection.AddKeyedSingleton<ObservableObject, View2Model>("View2");
 
@@ -61,17 +69,11 @@ public partial class App : Application
 
         Services = collection.BuildServiceProvider();
 
+        // Регистрируем разделы
         var sectionManager = Services.GetRequiredService<ISectionManager>();
         var sp = Services;
-        sectionManager.Add(
-            "View1",
-            new SectionViewModel("View1", "View1", sectionManager),
-            sp.GetRequiredKeyedService<ObservableRecipient>);
-
-        sectionManager.Add(
-            "View2",
-            new SectionViewModel("View2", "View2", sectionManager),
-            sp.GetRequiredKeyedService<ObservableObject>);
+        sectionManager.Add(key:"View1", title:"View1", sp.GetRequiredKeyedService<ObservableRecipient>);
+        sectionManager.Add(key:"View2", title: "View2", sp.GetRequiredKeyedService<ObservableObject>);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {

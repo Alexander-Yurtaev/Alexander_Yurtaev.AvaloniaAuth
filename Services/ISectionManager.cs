@@ -9,5 +9,5 @@ public interface ISectionManager
     SectionViewModel[] SectionsSource { get; }
     SectionViewModel SelectedSection { get; set; }
     ObservableObject? ViewModel { get; }
-    void Add(string key, SectionViewModel section, Func<string, ObservableObject> viewModelFactory);
+    void Add(string key, string title, Func<string, ObservableObject> viewModelFactory);
 }
