@@ -9,7 +9,7 @@
         xmlns:views="using:Alexander_Yurtaev.AvaloniaAuth.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Alexander_Yurtaev.AvaloniaAuth.MainWindow"
-        Title="Alexander_Yurtaev.AvaloniaAuth"
+        Title="Александр Юртаев | .NET frontend developer AvaloniaUI"
         x:DataType="viewmodels:MainViewModel"
         x:Name="MainWnd">
     <Window.DataTemplates>
