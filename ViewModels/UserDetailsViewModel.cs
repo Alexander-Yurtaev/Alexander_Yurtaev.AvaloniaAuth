@@ -17,6 +17,7 @@ public partial class UserDetailsViewModel : ObservableObject
     {
         
     }
+
     public UserDetailsViewModel(UserDetails details)
     {
         Model = details;

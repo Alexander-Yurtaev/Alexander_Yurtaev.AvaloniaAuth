@@ -11,8 +11,11 @@ public class FakeHttpMessageHandler : HttpMessageHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        HttpResponseMessage message = new();
-        message.StatusCode = HttpStatusCode.NotFound;
+        HttpResponseMessage message = new()
+        {
+            StatusCode = HttpStatusCode.NotFound
+        };
+
         if (request.Method == HttpMethod.Post)
         {
             if (request.RequestUri?.AbsolutePath == "/api/auth/register")
@@ -41,10 +44,16 @@ public class FakeHttpMessageHandler : HttpMessageHandler
 
     private async Task ProcessRegisterRequest(HttpRequestMessage request, HttpResponseMessage message)
     {
+        string email = "";
+        string name = "";
+
         if (request.Content is not null)
         {
             var bodyString = await request.Content.ReadAsStringAsync();
             var registerRequest = JsonSerializer.Deserialize<RegisterRequest>(bodyString);
+            email = registerRequest!.Email;
+            name = registerRequest!.Name;
+
         }
         else
         {
@@ -54,11 +63,11 @@ public class FakeHttpMessageHandler : HttpMessageHandler
 
         message.StatusCode = HttpStatusCode.OK;
         message.Content = new StringContent(
-"""
+$$"""
 {
   "id": "usr_mv8jcu81",
-  "email": "dev@example.com",
-  "name": "API Builder",
+  "email": "{{email}}",
+  "name": "{{name}}",
   "role": "user",
   "status": "pending_verification",
   "created_at": "2026-10-14T20:01:43.681Z",
