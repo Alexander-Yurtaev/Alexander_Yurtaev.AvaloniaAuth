@@ -19,7 +19,7 @@
 
 ## Особенности работы приложения с данными
 - необходимо зайти в файл App.axaml.cs
-- найти флаг UseFakeHandler
-- если установить UseFakeHandler=true, то данные будут браться из Tests/FakeHttpMessageHandler.cs (на случай, если сайт недоступен)
-- если установить UseFakeHandler=false, то будут браться данные с сайта https://fakeapifordevs.vercel.app
+- найти флаг `UseFakeHandler`
+- если установить `UseFakeHandler=true`, то данные будут браться из Tests/FakeHttpMessageHandler.cs (на случай, если сайт недоступен)
+- если установить `UseFakeHandler=false`, то будут браться данные с сайта https://fakeapifordevs.vercel.app
 - в файле Tests/FakeHttpMessageHandler.cs можно установить задержки, либо выдавать ошибки при эмуляции отдачи данных
