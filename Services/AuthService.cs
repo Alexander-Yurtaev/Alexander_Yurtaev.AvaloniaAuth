@@ -21,9 +21,9 @@ public class AuthService : ObservableObject, IAuthService
         _dataProvider = dataProvider;
     }
 
-    public bool IsAuthorized => User is not null;
+    public bool IsAuthorized => UserInfo is not null;
     
-    public UserDetails? User { get; private set; }
+    public UserDetails? UserInfo { get; private set; }
 
     public async Task<RegisteredUserDto> RegisterAsync(string email, string name, string password, CancellationToken ct)
     {
@@ -42,27 +42,34 @@ public class AuthService : ObservableObject, IAuthService
 
     public async Task LoginAsync(string email, string password, CancellationToken ct)
     {
-        var tokensModel = await _dataProvider.LoginAsync(email, password, ct);
-        if (tokensModel is not null)
+        var response = await _dataProvider.LoginAsync(email, password, ct)
+            ??
+            throw new NoNullAllowedException("Ошибка при авторизации");
+
+        if (!string.IsNullOrEmpty(response.Error))
         {
-            _tokensModel = new TokensModel(tokensModel.AccessToken, tokensModel.RefreshToken);
-            var user = await _dataProvider.GetUserAsync(_tokensModel.AccessToken, ct);
-            User = user;
-            WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
+            throw new InvalidOperationException(response.Message);
         }
+
+        if (string.IsNullOrEmpty(response.AccessToken) || string.IsNullOrEmpty(response.RefreshToken))
+        {
+            throw new InvalidOperationException("Ошибка при авторизации");
+        }
+
+        _tokensModel = new TokensModel(response.AccessToken, response.RefreshToken);
     }
 
-    public async Task LoadUserAsync(string accessToken, CancellationToken ct)
+    public async Task LoadUserAsync(CancellationToken ct)
     {
-        User = await _dataProvider.GetUserAsync(_tokensModel!.AccessToken, ct);
-        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
+        UserInfo = await _dataProvider.GetUserAsync(_tokensModel!.AccessToken, ct);
+        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(UserInfo));
     }
 
     public async Task LogoutAsync(CancellationToken ct)
     {
         await _dataProvider.LogoutAsync(_tokensModel!.RefreshToken, ct);
-        User = null;
+        UserInfo = null;
         _tokensModel = null;
-        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(User));
+        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(UserInfo));
     }
 }

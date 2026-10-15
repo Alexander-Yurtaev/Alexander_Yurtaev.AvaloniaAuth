@@ -25,7 +25,7 @@ public partial class View1Model : ObservableRecipient, IRecipient<ValueChangedMe
     private object? GetContent()
     {
         return _authService.IsAuthorized
-            ? new UserDetailsViewModel(_authService.User!)
+            ? new UserDetailsViewModel(_authService.UserInfo!)
             : new UnAuthorizedModel();
     }
 

@@ -54,7 +54,7 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
     public void Receive(ValueChangedMessage<UserDetails?> message)
     {
         Message = (_authService.IsAuthorized)
-            ? _authService.User!.Email
+            ? _authService.UserInfo!.Email
             : string.Empty;
     }
 }
