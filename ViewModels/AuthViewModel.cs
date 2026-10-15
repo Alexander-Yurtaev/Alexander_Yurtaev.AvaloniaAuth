@@ -1,14 +1,13 @@
-﻿using Alexander_Yurtaev.AvaloniaAuth.Models;
+﻿using Alexander_Yurtaev.AvaloniaAuth.Messages;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 
-public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<UserDetails?>>
+public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<UserInfoChangedMessage>>
 {
     private readonly AuthorizedViewModel _authorizedViewModel;
     private readonly Func<LoginViewModel> _loginViewModelFactory;
@@ -29,7 +28,7 @@ public partial class AuthViewModel : ObservableRecipient, IRecipient<ValueChange
         Content = GetContent();
     }
 
-    public void Receive(ValueChangedMessage<UserDetails?> message)
+    public void Receive(ValueChangedMessage<UserInfoChangedMessage> message)
     {
         Content = GetContent();
     }

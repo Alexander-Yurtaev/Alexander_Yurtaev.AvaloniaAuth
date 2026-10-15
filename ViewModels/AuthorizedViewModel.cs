@@ -1,4 +1,4 @@
-﻿using Alexander_Yurtaev.AvaloniaAuth.Models;
+﻿using Alexander_Yurtaev.AvaloniaAuth.Messages;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.ViewModels;
 
-public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<UserDetails?>>
+public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<UserInfoChangedMessage>>
 {
     private readonly IAuthService _authService;
     private CancellationTokenSource? _cts;
@@ -51,9 +51,9 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
         }
     }
 
-    public void Receive(ValueChangedMessage<UserDetails?> message)
+    public void Receive(ValueChangedMessage<UserInfoChangedMessage> message)
     {
-        Message = (_authService.IsAuthorized)
+        Message = _authService.IsAuthorized
             ? _authService.UserInfo!.Email
             : string.Empty;
     }

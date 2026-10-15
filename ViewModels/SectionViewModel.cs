@@ -1,12 +1,12 @@
-﻿using Alexander_Yurtaev.AvaloniaAuth.Services;
+﻿using Alexander_Yurtaev.AvaloniaAuth.Messages;
+using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Alexander_Yurtaev.AvaloniaAuth.Models;
 
-public partial class SectionViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<string>>
+public partial class SectionViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<SectionChangedMessage>>
 {
     private readonly ISectionManager _sectionManager;
 
@@ -32,13 +32,15 @@ public partial class SectionViewModel : ObservableRecipient, IRecipient<ValueCha
     {
         if (value == true)
         {
-            WeakReferenceMessenger.Default.Send(new ValueChangedMessage<string>(Key));
+            var message = new SectionChangedMessage(Key);
+            WeakReferenceMessenger.Default
+                .Send(new ValueChangedMessage<SectionChangedMessage>(message));
         }
     }
 
-    public void Receive(ValueChangedMessage<string> message)
+    public void Receive(ValueChangedMessage<SectionChangedMessage> message)
     {
-        IsChecked = Key == message.Value;
+        IsChecked = Key == message.Value.Key;
         if (IsChecked == true)
         {
             _sectionManager.SelectedSection = this;

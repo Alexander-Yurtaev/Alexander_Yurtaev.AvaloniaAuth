@@ -1,5 +1,6 @@
 ﻿using Alexander_Yurtaev.AvaloniaAuth.Data;
 using Alexander_Yurtaev.AvaloniaAuth.Dto;
+using Alexander_Yurtaev.AvaloniaAuth.Messages;
 using Alexander_Yurtaev.AvaloniaAuth.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
@@ -71,7 +72,9 @@ public class AuthService : ObservableObject, IAuthService
         }
 
         UserInfo = new UserDetails(response.Id, response.Email, response.Name, response.Avatar, response.Role);
-        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(UserInfo));
+        var message = new UserInfoChangedMessage(response.Id, response.Email);
+        WeakReferenceMessenger.Default
+            .Send(new ValueChangedMessage<UserInfoChangedMessage>(message));
     }
 
     public async Task LogoutAsync(CancellationToken ct)
@@ -88,6 +91,8 @@ public class AuthService : ObservableObject, IAuthService
         UserInfo = null;
         _tokensModel = null;
 
-        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<UserDetails?>(UserInfo));
+        var message = new UserInfoChangedMessage("", "");
+        WeakReferenceMessenger.Default
+            .Send(new ValueChangedMessage<UserInfoChangedMessage>(message));
     }
 }
