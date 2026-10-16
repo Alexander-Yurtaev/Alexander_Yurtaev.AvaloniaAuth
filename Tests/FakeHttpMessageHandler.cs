@@ -17,11 +17,11 @@ public class FakeHttpMessageHandler : HttpMessageHandler
         {
             StatusCode = HttpStatusCode.NotFound
         };
+
         if (request.Method == HttpMethod.Post)
         {
             if (request.RequestUri?.AbsolutePath == "/api/auth/register")
             {
-                //message.StatusCode = HttpStatusCode.OK;
                 //await Task.Delay(5000);
                 await ProcessRegisterRequest(request, message);
             }

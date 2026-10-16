@@ -1,4 +1,5 @@
 ﻿using Alexander_Yurtaev.AvaloniaAuth.Dto;
+using Alexander_Yurtaev.AvaloniaAuth.Helpers;
 using Alexander_Yurtaev.AvaloniaAuth.Models;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -95,7 +96,7 @@ public partial class RegisterDialogViewModel : ObservableValidator
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            ErrorMessage = ex.GetBaseException().Message;
+            ErrorMessage = ExceptionHelper.GetErrorMessage(ex);
         }
     }
 

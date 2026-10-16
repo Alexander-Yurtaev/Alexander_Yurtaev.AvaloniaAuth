@@ -1,4 +1,5 @@
-﻿using Alexander_Yurtaev.AvaloniaAuth.Messages;
+﻿using Alexander_Yurtaev.AvaloniaAuth.Helpers;
+using Alexander_Yurtaev.AvaloniaAuth.Messages;
 using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -49,7 +50,7 @@ public partial class AuthorizedViewModel : ObservableRecipient, IRecipient<Value
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            ErrorMessage = ex.GetBaseException().Message;
+            ErrorMessage = ExceptionHelper.GetErrorMessage(ex);
         }
     }
 

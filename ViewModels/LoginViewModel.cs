@@ -1,4 +1,5 @@
-﻿using Alexander_Yurtaev.AvaloniaAuth.Services;
+﻿using Alexander_Yurtaev.AvaloniaAuth.Helpers;
+using Alexander_Yurtaev.AvaloniaAuth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -71,7 +72,7 @@ public partial class LoginViewModel : ObservableValidator
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            ErrorMessage = ex.GetBaseException().Message;
+            ErrorMessage = ExceptionHelper.GetErrorMessage(ex);
         }
     }
 
@@ -81,7 +82,6 @@ public partial class LoginViewModel : ObservableValidator
     public async Task Register()
     {
         ErrorMessage = string.Empty;
-        OnPropertyChanged(nameof(HasErrorMessage));
 
         try
         {
@@ -98,8 +98,7 @@ public partial class LoginViewModel : ObservableValidator
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            ErrorMessage = ex.GetBaseException().Message;
-            OnPropertyChanged(nameof(HasErrorMessage));
+            ErrorMessage = ExceptionHelper.GetErrorMessage(ex);
         }
     }
 
