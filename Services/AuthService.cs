@@ -79,7 +79,7 @@ public class AuthService : ObservableObject, IAuthService
 
     public async Task LogoutAsync(CancellationToken ct)
     {
-        var response = await _dataProvider.LogoutAsync(_tokensModel!.AccessToken, ct)
+        var response = await _dataProvider.LogoutAsync(_tokensModel!.RefreshToken, ct)
             ??
             throw new NoNullAllowedException("Произошла ошибка");
 
